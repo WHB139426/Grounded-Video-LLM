@@ -15,7 +15,7 @@ def parse_args():
     # device
     parser.add_argument('--seed', type=int, default=42)
     parser.add_argument('--device', type=str, default='cuda:0')
-    parser.add_argument('--dtype', type=torch.dtype, default=torch.bfloat16, choices=[torch.bfloat16, torch.float16, torch.float32])
+    parser.add_argument('--dtype', type=torch.dtype, default=torch.bfloat16, choices=[torch.bfloat16, torch.float16, torch.float32]) # choose 'torch.float16' if your device doesn't support bfloat16
 
     # model
     parser.add_argument('--model', type=str, default='llava_next_video', choices=['llava_next_video'])
@@ -26,7 +26,7 @@ def parse_args():
     parser.add_argument('--num_frames', type=int, default=96)
     parser.add_argument('--num_segs', type=int, default=12)
     parser.add_argument('--lora', type=bool, default=True)
-    parser.add_argument('--attn_implementation', type=str, default="flash_attention_2", choices=['eager', 'flash_attention_2'])
+    parser.add_argument('--attn_implementation', type=str, default="flash_attention_2", choices=['eager', 'flash_attention_2']) # choose 'eager' if you cannot install flash-flash_attention_2-2
 
     # path
     parser.add_argument('--config_path', type=str, default="weight_path/Phi-3.5-vision-instruct")
