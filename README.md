@@ -27,7 +27,7 @@ Set your own `weight_path` to storage the pretrained weights. The folder should 
 │   └── ckpt
 │   └──...
 ```
-1. Download the pretrained weights [[🤗HF](https://huggingface.co/WHB139426/Grounded-Video-LLM/tree/main)] in your own `weight_path`. 
+Download the pretrained weights [[🤗HF](https://huggingface.co/WHB139426/Grounded-Video-LLM/tree/main)] in your own `weight_path`. 
 
 ## Qucik Inference
 We give a short example to run the inference code.
