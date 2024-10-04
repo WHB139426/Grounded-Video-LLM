@@ -44,7 +44,7 @@ We give a brief example to run the inference code. We recommend GPUs with 24GB m
 2. run the following script: `bash scripts/inference.sh` to run our example in `experiments/_3klvlS4W7A.mp4`.
 3. You can change the `prompt_grounding`, `prompt_videoqa`, `video_path` in argparse and run `python inference.py` for your own case.
 
-https://github.com/WHB139426/Grounded-Video-LLM/issues/1#issue-2566058858.mp4
+https://private-user-images.githubusercontent.com/115783170/373608088-69f83fd7-59d2-4105-a766-cd712d14d425.mp4
 
 ## TODO List
 - [x] Release the Phi3.5-Vision-Instruct version.
