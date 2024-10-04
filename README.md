@@ -46,8 +46,11 @@ We give a brief example to run the inference code. We recommend GPUs with 24GB m
 https://private-user-images.githubusercontent.com/115783170/373608088-69f83fd7-59d2-4105-a766-cd712d14d425.mp4
 ```
 USER: Give you a textual query: 'The female host wearing purple clothes is reporting news in the studio'. When does the described content occur in the video? Please return the start and end timestamps.
+
 Grounded-VideoLLM: From 15.15 seconds to 25.09 seconds.
+
 USER: Why was the man in green clothes interviewed?
+
 Grounded-VideoLLM: The man in green clothes was interviewed to provide his perspective on the incident and the history of violence in the apartment complex.
 ```
 3. You can change the `prompt_grounding`, `prompt_videoqa`, `video_path` in argparse and run `python inference.py` for your own case.
