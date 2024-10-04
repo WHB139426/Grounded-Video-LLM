@@ -44,7 +44,7 @@ We give a short example to run the inference code. We recommend GPUs with 24GB m
 2. run the following script: `bash scripts/inference.sh` to run our example.
 3. You can change the `prompt_grounding`, `prompt_videoqa`, `video_path` in argparse to run your own case.
 
-<div align="center"><video src="./experiments/_3klvlS4W7A.mp4" width="800"></div>
+<a href="https://github.com/DAMO-NLP-SG/VideoLLaMA2/assets/18526640/e0e7951c-f392-42ed-afad-b2c7984d3e38">Download Video</a>
 
 ## TODO List
 - [x] Release the Phi3.5-Vision-Instruct version.
