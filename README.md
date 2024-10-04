@@ -7,11 +7,11 @@ This is the repository for the video large langauge model : **Grounded-VideoLLM*
 
 We sharpen our model by incorporating 
 
-- (1) an additional temporal stream to encode the relationships between frames and 
+- An additional temporal stream to encode the relationships between frames and 
 
-- (2) discrete temporal tokens enriched with specific time knowledge to represent timestamps. 
+- Discrete temporal tokens enriched with specific time knowledge to represent timestamps. 
 
-- We employ a multi-stage training scheme, beginning with simple video-captioning tasks and progressively introducing video temporal grounding tasks of increasing complexity. To further enhance the temporal reasoning capability, we also curate a grounded VideoQA dataset by an automatic annotation pipeline. 
+- A multi-stage training scheme, beginning with simple video-captioning tasks and progressively introducing video temporal grounding tasks of increasing complexity. To further enhance the temporal reasoning capability, we also curate a grounded VideoQA dataset by an automatic annotation pipeline. 
 
 
 ## Install
