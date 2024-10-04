@@ -41,7 +41,7 @@ Download the pretrained weights [[🤗HF](https://huggingface.co/WHB139426/Groun
 ## Qucik Inference
 We give a brief example to run the inference code. We recommend GPUs with 24GB memeroy.
 1. replace the parameter `weight_path` in `scripts/inference.sh` with your own weight_path that you set above.
-2. run the command `bash scripts/inference.sh` to reproduce our example below.
+2. run the command `bash scripts/inference.sh` to reproduce our example below:
 
 https://private-user-images.githubusercontent.com/115783170/373608088-69f83fd7-59d2-4105-a766-cd712d14d425.mp4
 ```
