@@ -36,7 +36,7 @@ def parse_args():
     parser.add_argument('--ckpt_path', type=str, default='weight_path/ckpt/sft_llava_next_video_phi3.5_mix_sft_multi_modal_projector_video_projecter_language_model.pth')
 
     # inputs
-    parser.add_argument('--prompt_grounding', type=str, default="The female host wearing purple clothes is reporting news in the studio")
+    parser.add_argument('--prompt_grounding', type=str, default="Give you a textual query: 'The female host wearing purple clothes is reporting news in the studio'. When does the described content occur in the video? Please return the start and end timestamps.")
     parser.add_argument('--prompt_videoqa', type=str, default="Why was the man in green clothes interviewed?")
     parser.add_argument('--video_path', type=str, default="./experiments/_3klvlS4W7A.mp4")
 
@@ -68,7 +68,7 @@ def create_inputs(args, grounding_token):
     chat_template = {'phi3.5': Phi_3_5_Template(), 'llama3': LLaMA3_Template(), 'vicuna': Vicuna_Template()}[args.llm]
     if grounding_token:
         conv = [
-            {"from": "human", "value": DEFAULT_IMAGE_TOKEN + ' ' + GROUNDING_TOKEN + '\n'+f"Give you a textual query: '{args.prompt_grounding}'. When does the described content occur in the video? Please return the start and end timestamps."},
+            {"from": "human", "value": DEFAULT_IMAGE_TOKEN + ' ' + GROUNDING_TOKEN + '\n'+args.prompt_grounding},
             {"from": "gpt", "value": ''}                
         ]
     else:
