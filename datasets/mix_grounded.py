@@ -3,20 +3,20 @@ import numpy as np
 import torch
 import sys
 import os
+import re
 sys.path.append(os.path.abspath(os.path.join(__file__, "..", "..")))
 from mm_utils.utils import *
 from mm_utils.video_utils import read_frames_decord, read_frames_av
-from datasets.chat.base_template import LLaMA3_Template, Vicuna_Template, Phi_3_5_Template, DEFAULT_IMAGE_TOKEN
+from datasets.chat.base_template import LLaMA3_Template, Vicuna_Template, Phi_3_5_Template, DEFAULT_IMAGE_TOKEN, GROUNDING_TOKEN
 
-
-class MixPretrain(Dataset):
+class MixGrounded(Dataset):
     def __init__(
         self,
-        anno_path = "data_path/mix_pretrain/mix_pretrain.json",
+        anno_path = "data_path/mix_grounded/mix_grounded.json",
         video_path = "data_path",
         num_frames = 96,
         num_segs = 12,
-        num_temporal_tokens = 500,
+        num_temporal_tokens = 300,
         sample='rand',
         llm='llama3',
     ):
@@ -49,8 +49,36 @@ class MixPretrain(Dataset):
             self.video_files.append(item['video_file'])
             self.video_ids.append(item['video_id'])
             conversations = item['conversation']
+            conversations = self.detect_timestamp_response(conversations)
             self.text_inputs.append(self.chat_template.encode(conversations))
             self.dataset_names.append(item['dataset_name'])
+
+    def detect_timestamp_response(self, convs):
+        pattern = r'<-?\d+(\.\d+)?>'
+        for i in range(len(convs)):
+            if i%2 == 0:
+                if bool(re.search(pattern, convs[i+1]['value'])):
+                    if DEFAULT_IMAGE_TOKEN in convs[i]['value']:
+                        convs[i]['value'] = DEFAULT_IMAGE_TOKEN + ' ' + GROUNDING_TOKEN + '\n' + convs[i]['value'].replace(DEFAULT_IMAGE_TOKEN+'\n', '')
+                    else:
+                        convs[i]['value'] = GROUNDING_TOKEN + '\n' + convs[i]['value']
+            else:
+                continue
+        return convs
+    
+    def convert_time_position(self, answer, duration):
+        # 定义一个函数，将匹配到的浮点数转换为整数
+        def replace_float(match):
+            full_match = match.group(0)
+            # 去掉尖括号并将其转换为浮点数
+            time = float(full_match.strip('<>'))
+            quantized_time = int(self.num_temporal_tokens * time / duration)
+            return f'<{quantized_time}>'
+        # 使用正则表达式匹配所有的浮点数时间戳
+        pattern = r'<-?\d+(\.\d+)?>'
+        # 替换匹配到的浮点数时间戳
+        new_answer = re.sub(pattern, replace_float, answer)
+        return new_answer
 
     def __len__(self):
         return len(self.video_ids)
@@ -91,7 +119,7 @@ class MixPretrain(Dataset):
                     {"from": "gpt", "value": "A man silently narrates his experience driving an audi."}
                 ]
                 text_input = self.chat_template.encode(conversations)
-                
+
         temporal_pixel_values = []
         for i in range(pixel_values.shape[0]): 
             temporal_pixel_values.append(self.video_processor(pixel_values[i]))
@@ -104,11 +132,15 @@ class MixPretrain(Dataset):
             spatial_pixel_values.append(self.image_processor(pixel_values[i_spatial]))
         spatial_pixel_values = torch.tensor(np.array(spatial_pixel_values)) # [num_segs, 3, 336, 336]
 
+
         return {
                 "video_ids": video_id,
                 "question_ids": question_id,
-                "text_inputs": text_input,
+                "text_inputs": self.convert_time_position(text_input, duration),
                 "temporal_pixel_values": temporal_pixel_values,
                 "spatial_pixel_values": spatial_pixel_values,
                 "dataset_names": dataset_name,
+                "durations": float(duration),
+
             }
+

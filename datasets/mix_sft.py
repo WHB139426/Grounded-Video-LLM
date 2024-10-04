@@ -3,22 +3,24 @@ import numpy as np
 import torch
 import sys
 import os
+import re
 sys.path.append(os.path.abspath(os.path.join(__file__, "..", "..")))
 from mm_utils.utils import *
 from mm_utils.video_utils import read_frames_decord, read_frames_av
-from datasets.chat.base_template import LLaMA3_Template, Vicuna_Template, Phi_3_5_Template, DEFAULT_IMAGE_TOKEN
+from datasets.chat.base_template import LLaMA3_Template, Vicuna_Template, Phi_3_5_Template, DEFAULT_IMAGE_TOKEN, GROUNDING_TOKEN
 
 
-class MixPretrain(Dataset):
+class MixSFT(Dataset):
     def __init__(
         self,
-        anno_path = "data_path/mix_pretrain/mix_pretrain.json",
+        anno_path = "data_path/mix_sft/mix_sft.json",
         video_path = "data_path",
         num_frames = 96,
         num_segs = 12,
-        num_temporal_tokens = 500,
+        num_temporal_tokens = 300,
         sample='rand',
         llm='llama3',
+        not_two_stream=False,
     ):
         self.video_path = video_path
         self.num_frames = num_frames
@@ -35,6 +37,7 @@ class MixPretrain(Dataset):
         elif llm == 'phi3.5':
             self.chat_template = Phi_3_5_Template()
 
+
         self.video_processor = frame_transform(image_size=224, mean=INTERNVIDEO_MEAN, std=INTERNVIDEO_STD)
         self.image_processor = frame_transform(image_size=336, mean=OPENAI_DATASET_MEAN, std=OPENAI_DATASET_STD)
 
@@ -49,11 +52,39 @@ class MixPretrain(Dataset):
             self.video_files.append(item['video_file'])
             self.video_ids.append(item['video_id'])
             conversations = item['conversation']
+            conversations = self.detect_timestamp_response(conversations)
             self.text_inputs.append(self.chat_template.encode(conversations))
             self.dataset_names.append(item['dataset_name'])
 
     def __len__(self):
         return len(self.video_ids)
+
+    def convert_time_position(self, answer, duration):
+        # 定义一个函数，将匹配到的浮点数转换为整数
+        def replace_float(match):
+            full_match = match.group(0)
+            # 去掉尖括号并将其转换为浮点数
+            time = float(full_match.strip('<>'))
+            quantized_time = int(self.num_temporal_tokens * time / duration)
+            return f'<{quantized_time}>'
+        # 使用正则表达式匹配所有的浮点数时间戳
+        pattern = r'<-?\d+(\.\d+)?>'
+        # 替换匹配到的浮点数时间戳
+        new_answer = re.sub(pattern, replace_float, answer)
+        return new_answer
+
+    def detect_timestamp_response(self, convs):
+        pattern = r'<-?\d+(\.\d+)?>'
+        for i in range(len(convs)):
+            if i%2 == 0:
+                if bool(re.search(pattern, convs[i+1]['value'])):
+                    if DEFAULT_IMAGE_TOKEN in convs[i]['value']:
+                        convs[i]['value'] = DEFAULT_IMAGE_TOKEN + ' ' + GROUNDING_TOKEN + '\n' + convs[i]['value'].replace(DEFAULT_IMAGE_TOKEN+'\n', '')
+                    else:
+                        convs[i]['value'] = GROUNDING_TOKEN + '\n' + convs[i]['value']
+            else:
+                continue
+        return convs
 
     def __getitem__(self, index):
         """return the input ids, attention masks and target ids"""
@@ -62,12 +93,10 @@ class MixPretrain(Dataset):
         text_input = self.text_inputs[index]
         video_file = str(self.video_files[index])
         dataset_name = self.dataset_names[index]
-
-        video_path = os.path.join(self.video_path, video_file)
-
+        
         try:
             pixel_values, frame_indices, fps, total_frame_num, duration = read_frames_decord(
-                video_path = video_path,
+                video_path = os.path.join(self.video_path, video_file),
                 num_frames = self.num_frames,
                 sample = self.sample,
             )
@@ -75,7 +104,7 @@ class MixPretrain(Dataset):
             print(f"read_frames_decord ERROR: {dataset_name}, {question_id}, {video_id}, {video_file}, {text_input}")
             try:
                 pixel_values, frame_indices, fps, total_frame_num, duration = read_frames_av(
-                    video_path = video_path,
+                    video_path = os.path.join(self.video_path, video_file),
                     num_frames = self.num_frames,
                     sample = self.sample,
                 )
@@ -91,7 +120,7 @@ class MixPretrain(Dataset):
                     {"from": "gpt", "value": "A man silently narrates his experience driving an audi."}
                 ]
                 text_input = self.chat_template.encode(conversations)
-                
+
         temporal_pixel_values = []
         for i in range(pixel_values.shape[0]): 
             temporal_pixel_values.append(self.video_processor(pixel_values[i]))
@@ -107,8 +136,26 @@ class MixPretrain(Dataset):
         return {
                 "video_ids": video_id,
                 "question_ids": question_id,
-                "text_inputs": text_input,
+                "text_inputs": self.convert_time_position(text_input, duration),
+                'dataset_names': dataset_name,
                 "temporal_pixel_values": temporal_pixel_values,
                 "spatial_pixel_values": spatial_pixel_values,
-                "dataset_names": dataset_name,
+                "durations": float(duration),
             }
+
+# dataset = MixSFT(llm='phi3.5', num_frames=12, num_segs=12)
+# for i in range(10):
+#     entry = random.choice(dataset)
+#     print(entry['question_ids'], entry['video_ids'], entry['dataset_names'], entry['durations'])
+#     print("text_inputs: ",             entry['text_inputs'])
+#     print("temporal_pixel_values: ",             entry['temporal_pixel_values'].shape)
+#     print("spatial_pixel_values: ",             entry['spatial_pixel_values'].shape)
+#     print()
+# print(len(dataset))
+
+
+
+
+
+
+

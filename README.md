@@ -39,8 +39,8 @@ Set your own `weight_path` to storage the pretrained weights. The folder should 
 Download the pretrained weights [[🤗HF](https://huggingface.co/WHB139426/Grounded-Video-LLM/tree/main)] in your own `weight_path`. 
 
 ## Qucik Inference
-We give a short example to run the inference code. We recommend GPUs with 24GB memeroy.
-1. replace the parameter `weight_path` in `scripts/inference.sh` with your own path that you set above.
+We give a brief example to run the inference code. We recommend GPUs with 24GB memeroy.
+1. replace the parameter `weight_path` in `scripts/inference.sh` with your own weight_path that you set above.
 2. run the following script: `bash scripts/inference.sh` to run our example in `experiments/_3klvlS4W7A.mp4`.
 3. You can change the `prompt_grounding`, `prompt_videoqa`, `video_path` in argparse and run `python inference.py` for your own case.
 
