@@ -12,8 +12,8 @@ from datasets.chat.base_template import LLaMA3_Template, Vicuna_Template, Phi_3_
 class MixPretrain(Dataset):
     def __init__(
         self,
-        anno_path = "/home/haibo/data/mix_pretrain/mix_pretrain.json",
-        video_path = "/home/haibo/data",
+        anno_path = "data_path/mix_pretrain/mix_pretrain.json",
+        video_path = "data_path",
         num_frames = 96,
         num_segs = 12,
         num_temporal_tokens = 500,
