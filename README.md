@@ -34,3 +34,8 @@ We give a short example to run the inference code. We recommend GPUs with 24GB m
 1. replace the parameter `weight_path` in `scripts/inference.sh` with your own path that you set above.
 2. run the following script: `bash scripts/inference.sh`
 3. You can change the `prompt_grounding`, `prompt_videoqa`, `video_path` in argparse to run your own case.
+
+## TODO List
+- [x] Release the Phi3.5-Vision-Instruct Version.
+- [ ] Release the LLaVA-Next-LLaMA3-8B Version.
+- [ ] The training scripts and datasets we used
