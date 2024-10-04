@@ -1095,7 +1095,7 @@ def pretrain_internvideo2_1b_patch14_224(num_frames):
         drop_path_rate=0.25,
         init_values=0.00001,
         qk_normalization=True,
-        use_flash_attn=True,
+        use_flash_attn=False,
         use_fused_rmsnorm=False,
         use_fused_mlp=False,
         fused_mlp_heuristic=1,
