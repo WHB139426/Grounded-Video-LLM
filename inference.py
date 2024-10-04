@@ -29,11 +29,11 @@ def parse_args():
     parser.add_argument('--attn_implementation', type=str, default="flash_attention_2", choices=['eager', 'flash_attention_2'])
 
     # path
-    parser.add_argument('--config_path', type=str, default="/home/haibo/weight_path/Phi-3.5-vision-instruct")
-    parser.add_argument('--tokenizer_path', type=str, default="/home/haibo/weight_path/Phi-3.5-mini-instruct")
-    parser.add_argument('--pretrained_video_path', type=str, default='/home/haibo/weight_path/internvideo/vision-encoder-InternVideo2-stage2_1b-224p-f4.pt')
-    parser.add_argument('--pretrained_vision_proj_llm_path', type=str, default='/home/haibo/weight_path/Phi-3.5-vision-instruct-seperated/')
-    parser.add_argument('--ckpt_path', type=str, default='/home/haibo/weight_path/ckpt/sft_llava_next_video_phi3.5_mix_sft_multi_modal_projector_video_projecter_language_model.pth')
+    parser.add_argument('--config_path', type=str, default="weight_path/Phi-3.5-vision-instruct")
+    parser.add_argument('--tokenizer_path', type=str, default="weight_path/Phi-3.5-mini-instruct")
+    parser.add_argument('--pretrained_video_path', type=str, default='weight_path/internvideo/vision-encoder-InternVideo2-stage2_1b-224p-f4.pt')
+    parser.add_argument('--pretrained_vision_proj_llm_path', type=str, default='weight_path/Phi-3.5-vision-instruct-seperated/')
+    parser.add_argument('--ckpt_path', type=str, default='weight_path/ckpt/sft_llava_next_video_phi3.5_mix_sft_multi_modal_projector_video_projecter_language_model.pth')
 
     # inputs
     parser.add_argument('--prompt_grounding', type=str, default="The female host wearing purple clothes is reporting news in the studio")
