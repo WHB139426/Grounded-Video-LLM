@@ -1,5 +1,8 @@
 # Grounded-VideoLLM: Sharpening Fine-grained Temporal Grounding in Video Large Language Models
 This is the official repository for the video large langauge model : **Grounded-VideoLLM**.
+<div align="center">
+  <img src="model.pdf"/>
+</div><br/>
 
 ## Install
 1. Clone this repository and navigate to folder
