@@ -44,7 +44,7 @@ We give a short example to run the inference code. We recommend GPUs with 24GB m
 2. run the following script: `bash scripts/inference.sh` to run our example.
 3. You can change the `prompt_grounding`, `prompt_videoqa`, `video_path` in argparse and run `python inference.py` for your own case.
 
-[![Watch the video](https://img.youtube.com/vi/_3klvlS4W7A/0.jpg)](https://www.youtube.com/watch?v=_3klvlS4W7A)
+<div align="center"><video src="https://www.youtube.com/watch?v=_3klvlS4W7A" width="800"></div>
 
 
 ## TODO List
