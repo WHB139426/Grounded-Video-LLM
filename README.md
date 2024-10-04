@@ -43,5 +43,5 @@ We give a short example to run the inference code. We recommend GPUs with 24GB m
 
 ## TODO List
 - [x] Release the Phi3.5-Vision-Instruct Version.
-- [ ] Release the LLaVA-Next-LLAMA3-8B Version.
-- [ ] The training scripts and datasets.
+- [ ] Release the LLaVA-Next-LLAMA3-8B Version (soon).
+- [ ] Release the training scripts and datasets.
