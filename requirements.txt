@@ -1,55 +1,33 @@
-accelerate==0.34.2
-av==13.0.0
-certifi==2024.8.30
-charset-normalizer==3.3.2
-decord==0.6.0
-einops==0.8.0
-filelock==3.16.1
-flash-attn==2.3.3
-fsspec==2024.9.0
-huggingface-hub==0.25.1
-idna==3.10
-Jinja2==3.1.4
-MarkupSafe==2.1.5
-mpmath==1.3.0
-networkx==3.3
-ninja==1.11.1.1
-numpy==1.26.4
-nvidia-cublas-cu12==12.1.3.1
-nvidia-cuda-cupti-cu12==12.1.105
-nvidia-cuda-nvrtc-cu12==12.1.105
-nvidia-cuda-runtime-cu12==12.1.105
-nvidia-cudnn-cu12==8.9.2.26
-nvidia-cufft-cu12==11.0.2.54
-nvidia-curand-cu12==10.3.2.106
-nvidia-cusolver-cu12==11.4.5.107
-nvidia-cusparse-cu12==12.1.0.106
-nvidia-nccl-cu12==2.18.1
-nvidia-nvjitlink-cu12==12.6.77
-nvidia-nvtx-cu12==12.1.105
-packaging==24.1
-pandas==2.2.3
-peft==0.3.0
-pillow==10.4.0
-psutil==6.0.0
-python-dateutil==2.9.0.post0
-pytz==2024.2
-PyYAML==6.0.2
-regex==2024.9.11
-requests==2.32.3
-safetensors==0.4.5
-six==1.16.0
-sympy==1.13.3
-timm==1.0.9
-tokenizer==3.4.5
-tokenizers==0.19.1
-torch==2.1.2
-torchaudio==2.1.2
-torchdata==0.8.0
-torchvision==0.16.2
-tqdm==4.66.5
-transformers==4.40.1
-triton==2.1.0
-typing_extensions==4.12.2
-tzdata==2024.2
-urllib3==2.2.3
+anaconda-anon-usage @ file:///croot/anaconda-anon-usage_1710965072196/work
+archspec @ file:///croot/archspec_1709217642129/work
+boltons @ file:///work/perseverance-python-buildout/croot/boltons_1698851177130/work
+Brotli @ file:///work/perseverance-python-buildout/croot/brotli-split_1698805593785/work
+certifi @ file:///croot/certifi_1707229174982/work/certifi
+cffi @ file:///croot/cffi_1700254295673/work
+charset-normalizer @ file:///tmp/build/80754af9/charset-normalizer_1630003229654/work
+conda @ file:///croot/conda_1710772050586/work
+conda-content-trust @ file:///work/perseverance-python-buildout/croot/conda-content-trust_1698882886606/work
+conda-libmamba-solver @ file:///croot/conda-libmamba-solver_1706733287605/work/src
+conda-package-handling @ file:///work/perseverance-python-buildout/croot/conda-package-handling_1698851267218/work
+conda_package_streaming @ file:///work/perseverance-python-buildout/croot/conda-package-streaming_1698847176583/work
+cryptography @ file:///croot/cryptography_1710350347627/work
+distro @ file:///work/perseverance-python-buildout/croot/distro_1701732366176/work
+idna @ file:///work/perseverance-python-buildout/croot/idna_1698845632828/work
+jsonpatch @ file:///croot/jsonpatch_1710807507480/work
+jsonpointer==2.1
+libmambapy @ file:///croot/mamba-split_1712091911343/work/libmambapy
+menuinst @ file:///croot/menuinst_1706732933928/work
+packaging @ file:///croot/packaging_1710807400464/work
+platformdirs @ file:///work/perseverance-python-buildout/croot/platformdirs_1701732573265/work
+pluggy @ file:///work/perseverance-python-buildout/croot/pluggy_1698805497733/work
+pycosat @ file:///work/perseverance-python-buildout/croot/pycosat_1698863456259/work
+pycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work
+PySocks @ file:///work/perseverance-python-buildout/croot/pysocks_1698845478203/work
+requests @ file:///croot/requests_1707355572290/work
+ruamel.yaml @ file:///work/perseverance-python-buildout/croot/ruamel.yaml_1698863605521/work
+setuptools==68.2.2
+tqdm @ file:///work/perseverance-python-buildout/croot/tqdm_1701735729845/work
+truststore @ file:///work/perseverance-python-buildout/croot/truststore_1701735771625/work
+urllib3 @ file:///croot/urllib3_1707770551213/work
+wheel==0.41.2
+zstandard @ file:///work/perseverance-python-buildout/croot/zstandard_1698847073368/work

@@ -1,5 +1,5 @@
 # Grounded-VideoLLM: Sharpening Fine-grained Temporal Grounding in Video Large Language Models
-This is the official repository for the video large langauge model : **Grounded-VideoLLM**, a novel Video-LLM adept at fine-grained temporal grounding. **Grounded-VideoLLM** not only excels in grounding tasks such as temporal sentence grounding, dense video captioning, and grounded VideoQA, but also shows great potential as a versatile video assistant for general video understanding.
+This is the official repository for the video large langauge model : **Grounded-VideoLLM**, a Video-LLM adept at fine-grained temporal grounding. **Grounded-VideoLLM** not only excels in grounding tasks such as temporal sentence grounding, dense video captioning, and grounded VideoQA, but also shows great potential as a versatile video assistant for general video understanding.
 
 <div align="center">
   <img src="model.png"/>
@@ -39,11 +39,16 @@ Set your own `weight_path` to storage the pretrained weights. The folder should 
 ├── Grounded-Video-LLM
 │   └── inference.py
 │   └── models
+│   └── mm_utils
+│   └── training
+│   └── scripts
 │   └── ...
 ├── weight_path
+│   └── Phi-3.5-mini-instruct
 │   └── Phi-3.5-vision-instruct-seperated
-│   └── internvideo
+│   └── Phi-3.5-vision-instruct
 │   └── ckpt
+│   └── internvideo
 │   └──...
 ```
 Download the pretrained weights [[🤗HF](https://huggingface.co/WHB139426/Grounded-Video-LLM/tree/main)] in your own `weight_path`. 
