@@ -42,6 +42,6 @@ We give a short example to run the inference code. We recommend GPUs with 24GB m
 3. You can change the `prompt_grounding`, `prompt_videoqa`, `video_path` in argparse to run your own case.
 
 ## TODO List
-- [x] Release the Phi3.5-Vision-Instruct Version.
-- [ ] Release the LLaVA-Next-LLAMA3-8B Version (soon).
+- [x] Release the Phi3.5-Vision-Instruct version.
+- [ ] Release the LLaVA-Next-LLAMA3-8B version (coming soon).
 - [ ] Release the training scripts and datasets.
