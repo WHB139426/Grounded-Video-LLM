@@ -20,7 +20,7 @@ pip install -r requirements.txt
 ```
 
 **Some installation suggestions**
-- We recommend you to pip install `flash-attn==2.3.3` and run the model with `torch.bfloat16`. If your device doesn't support them, you can skip them and replace the argparse parameter in `inference.py` by replacing `attn_implementation` and `dtype`, which may result in subtle numerical difference.
+- We recommend you to pip install `flash-attn==2.3.3` and run the model with `torch.bfloat16`. If your device doesn't support these, you can skip them and replace the argparse parameter in `inference.py` by replacing `attn_implementation` and `dtype`, which may result in subtle numerical difference.
 
 ## Prepare the pretrained weights
 
@@ -43,6 +43,8 @@ We give a short example to run the inference code. We recommend GPUs with 24GB m
 1. replace the parameter `weight_path` in `scripts/inference.sh` with your own path that you set above.
 2. run the following script: `bash scripts/inference.sh` to run our example.
 3. You can change the `prompt_grounding`, `prompt_videoqa`, `video_path` in argparse to run your own case.
+
+<div align="center"><video src="https://github.com/WHB139426/Grounded-Video-LLM/blob/master/experiments/_3klvlS4W7A.mp4" width="800"></div>
 
 ## TODO List
 - [x] Release the Phi3.5-Vision-Instruct version.
