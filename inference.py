@@ -26,6 +26,7 @@ def parse_args():
     parser.add_argument('--num_frames', type=int, default=96)
     parser.add_argument('--num_segs', type=int, default=12)
     parser.add_argument('--lora', type=bool, default=True)
+    parser.add_argument('--attn_implementation', type=str, default="flash_attention_2", choices=['eager', 'flash_attention_2'])
 
     # path
     parser.add_argument('--config_path', type=str, default="/home/haibo/weight_path/Phi-3.5-vision-instruct")
@@ -134,7 +135,7 @@ if __name__ == '__main__':
         num_temporal_tokens=args.num_temporal_tokens,
         lora=args.lora,
         llm=args.llm,
-        attn_implementation='eager',
+        attn_implementation=args.attn_implementation,
         config_path=args.config_path,
         tokenizer_path=args.tokenizer_path,
         pretrained_video_path=args.pretrained_video_path,

@@ -127,7 +127,7 @@ class LLAVA_NEXT_VIDEO(nn.Module):
             self.sub_GN = image_newlines['sub_GN'].to(self.device)
 
         print("loading video_encoder")
-        self.video_encoder = pretrain_internvideo2_1b_patch14_224(self.num_frames//self.num_segs)
+        self.video_encoder = pretrain_internvideo2_1b_patch14_224(num_frames=self.num_frames//self.num_segs, use_flash_attn=True if attn_implementation=="flash_attention_2" else False)
         state_dict = torch.load(pretrained_video_path, map_location='cpu')
         interpolate_pos_embed_internvideo2_new(state_dict, self.video_encoder, orig_t_size=4)
         self.video_encoder.load_state_dict(state_dict, strict=True)

@@ -1086,7 +1086,7 @@ class PretrainInternVideo2(nn.Module):
         return x_vis, x_pool_vis, x_clip_align, x_align
 
 
-def pretrain_internvideo2_1b_patch14_224(num_frames):
+def pretrain_internvideo2_1b_patch14_224(num_frames, use_flash_attn=False):
     model = PretrainInternVideo2(
         in_chans=3, img_size=224, patch_size=14,
         embed_dim=1408, depth=40, num_heads=16, mlp_ratio=48 / 11,
@@ -1095,7 +1095,7 @@ def pretrain_internvideo2_1b_patch14_224(num_frames):
         drop_path_rate=0.25,
         init_values=0.00001,
         qk_normalization=True,
-        use_flash_attn=False,
+        use_flash_attn=use_flash_attn,
         use_fused_rmsnorm=False,
         use_fused_mlp=False,
         fused_mlp_heuristic=1,
