@@ -56,9 +56,13 @@ We give a brief example to run the inference code. We recommend GPUs with 24GB m
 https://private-user-images.githubusercontent.com/115783170/373608088-69f83fd7-59d2-4105-a766-cd712d14d425.mp4
 
 ```
-USER: Give you a textual query: 'The female host wearing purple clothes is reporting news in the studio'. When does the described content occur in the video? Please return the start and end timestamps.
+USER: Give you a textual query: "The female host wearing purple clothes is reporting news in the studio". When does the described content occur in the video? Please return the start and end timestamps.
 
 Grounded-VideoLLM: From 15.15 seconds to 25.09 seconds.
+
+USER: Give you a textual query: "A sign written with 'NO TRESPASSING LOITERING DRUGS'". When does the described content occur in the video? Please return the start and end timestamps.
+
+Grounded-VideoLLM: From 107.95 seconds to 113.16 seconds.
 
 USER: Why was the man in green clothes interviewed?
 
