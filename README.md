@@ -42,6 +42,7 @@ Download the pretrained weights [[🤗HF](https://huggingface.co/WHB139426/Groun
 We give a brief example to run the inference code. We recommend GPUs with 24GB memeroy.
 1. replace the parameter `weight_path` in `scripts/inference.sh` with your own weight_path that you set above.
 2. run the following script: `bash scripts/inference.sh` to run our example below.
+
 https://private-user-images.githubusercontent.com/115783170/373608088-69f83fd7-59d2-4105-a766-cd712d14d425.mp4
 ```
 USER: Give you a textual query: 'The female host wearing purple clothes is reporting news in the studio'. When does the described content occur in the video? Please return the start and end timestamps.
