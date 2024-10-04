@@ -1,5 +1,5 @@
 # Grounded-VideoLLM: Sharpening Fine-grained Temporal Grounding in Video Large Language Models
-This is the repository for the video large langauge model : **Grounded-VideoLLM**, a novel Video-LLM adept at fine-grained temporal grounding. **Grounded-VideoLLM** not only excels in grounding tasks such as temporal sentence grounding, dense video captioning, and grounded VideoQA, but also shows great potential as a versatile video assistant for general video understanding.
+This is the official repository for the video large langauge model : **Grounded-VideoLLM**, a novel Video-LLM adept at fine-grained temporal grounding. **Grounded-VideoLLM** not only excels in grounding tasks such as temporal sentence grounding, dense video captioning, and grounded VideoQA, but also shows great potential as a versatile video assistant for general video understanding.
 
 <div align="center">
   <img src="model.png"/>
@@ -7,7 +7,7 @@ This is the repository for the video large langauge model : **Grounded-VideoLLM*
 
 We sharpen our model by incorporating 
 
-- An additional temporal stream to encode the relationships between frames and 
+- An additional temporal stream to encode the relationships between frames. 
 
 - Discrete temporal tokens enriched with specific time knowledge to represent timestamps. 
 
