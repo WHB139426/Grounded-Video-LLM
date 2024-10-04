@@ -42,9 +42,9 @@ Download the pretrained weights [[🤗HF](https://huggingface.co/WHB139426/Groun
 We give a short example to run the inference code. We recommend GPUs with 24GB memeroy.
 1. replace the parameter `weight_path` in `scripts/inference.sh` with your own path that you set above.
 2. run the following script: `bash scripts/inference.sh` to run our example.
-3. You can change the `prompt_grounding`, `prompt_videoqa`, `video_path` in argparse to run your own case.
+3. You can change the `prompt_grounding`, `prompt_videoqa`, `video_path` in argparse and run `python inference.py` for your own case.
 
-<a href="https://github.com/DAMO-NLP-SG/VideoLLaMA2/assets/18526640/e0e7951c-f392-42ed-afad-b2c7984d3e38">Download Video</a>
+<a href="./experiments/_3klvlS4W7A.mp4">Download Video</a>
 
 ## TODO List
 - [x] Release the Phi3.5-Vision-Instruct version.
