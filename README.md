@@ -41,10 +41,15 @@ Download the pretrained weights [[🤗HF](https://huggingface.co/WHB139426/Groun
 ## Qucik Inference
 We give a brief example to run the inference code. We recommend GPUs with 24GB memeroy.
 1. replace the parameter `weight_path` in `scripts/inference.sh` with your own weight_path that you set above.
-2. run the following script: `bash scripts/inference.sh` to run our example in `experiments/_3klvlS4W7A.mp4`.
-3. You can change the `prompt_grounding`, `prompt_videoqa`, `video_path` in argparse and run `python inference.py` for your own case.
-
+2. run the following script: `bash scripts/inference.sh` to run our example below.
 https://private-user-images.githubusercontent.com/115783170/373608088-69f83fd7-59d2-4105-a766-cd712d14d425.mp4
+```
+USER: Give you a textual query: 'The female host wearing purple clothes is reporting news in the studio'. When does the described content occur in the video? Please return the start and end timestamps.
+Grounded-VideoLLM: From 15.15 seconds to 25.09 seconds.
+USER: Why was the man in green clothes interviewed?
+Grounded-VideoLLM: The man in green clothes was interviewed to provide his perspective on the incident and the history of violence in the apartment complex.
+```
+3. You can change the `prompt_grounding`, `prompt_videoqa`, `video_path` in argparse and run `python inference.py` for your own case.
 
 ## TODO List
 - [x] Release the Phi3.5-Vision-Instruct version.
