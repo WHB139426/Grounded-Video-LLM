@@ -113,12 +113,13 @@ def create_inputs(args, grounding_token):
     
     return samples, duration
 
-def parse_time_interval(text, duration, num_temporal_tokens=300):
+def parse_time_interval(text, duration, num_temporal_tokens=300, llm='phi3.5'):
     pattern = r"<(\d+)>"
     def replace_func(match):
         x = int(match.group(1))
         m = duration * x / num_temporal_tokens
-        return f" {m:.2f} seconds"
+        if llm=='phi3.5':
+            return f" {m:.2f} seconds"
     return re.sub(pattern, replace_func, text)
 
 
@@ -169,7 +170,7 @@ if __name__ == '__main__':
 
     print('\n******grounding example******')
     print(samples_grounding['prompts'][0])
-    print(parse_time_interval(pred_texts_grounding, duration_grounding, args.num_temporal_tokens))
+    print(parse_time_interval(pred_texts_grounding, duration_grounding, args.num_temporal_tokens, args.llm))
 
     print('\n******videoqa example******')
     print(samples_videoqa['prompts'][0])
