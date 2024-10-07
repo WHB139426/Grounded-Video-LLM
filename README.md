@@ -15,13 +15,13 @@ This is the official repository for the video large langauge model : **Grounded-
 
 
 
-We sharpen our model by incorporating:
+💡 We sharpen our model by incorporating:
 - An additional temporal stream to encode the relationships between frames. 
 - Discrete temporal tokens enriched with specific time knowledge to represent timestamps. 
 - A multi-stage training scheme, beginning with simple video-captioning tasks and progressively introducing video temporal grounding tasks of increasing complexity. To further enhance the temporal reasoning capability, we also curate a grounded VideoQA dataset by an automatic annotation pipeline. 
 
 
-## Install
+## 🛠️ Install
 1. Clone this repository and navigate to folder
 ```bash
 git clone https://github.com/WHB139426/Grounded-Video-LLM.git
@@ -39,7 +39,7 @@ pip install -r requirements.txt
 **Some installation suggestions**
 - We recommend you to pip install `flash-attn==2.3.3` and run the model with `torch.bfloat16`. If your device doesn't support these, you can skip them and replace the argparse parameter `attn_implementation` and `dtype` in `inference.py`, which may result in subtle numerical difference.
 
-## Prepare the pretrained weights
+## 🤗 Prepare the pretrained weights
 
 Set your own `weight_path` to storage the pretrained weights. The folder should be organized as follows: 
 ```
@@ -60,7 +60,7 @@ Set your own `weight_path` to storage the pretrained weights. The folder should 
 ```
 Download the pretrained weights [[🤗HF](https://huggingface.co/WHB139426/Grounded-Video-LLM/tree/main)] in your own `weight_path`. 
 
-## Qucik Start
+## 🚀 Qucik Start
 We give a brief example to run the inference code. We recommend GPUs with 24GB memeroy.
 1. replace the parameter `weight_path` in `scripts/inference.sh` with your own weight_path that you set above.
 2. run the command `bash scripts/inference.sh` to reproduce the example below:
@@ -85,8 +85,22 @@ Grounded-VideoLLM: The man in green clothes was interviewed to provide his persp
 ## Grounded-VideoQA dataset
 We provide the Grounded-VideoQA dataset that we annotated with GPT-4o-mini in [[🤗HF](https://huggingface.co/WHB139426/Grounded-Video-LLM/blob/main/G-VideoQA-gpt4o-mini-anno.json)]. You can download the videos following [[ActivityNet](https://activity-net.org/download.html)] and [[QVHighlights](https://github.com/jayleicn/moment_detr)].
 
-## TODO List
+## 💡 TODO List
 - [x] Release the inference scripts.
 - [x] Release the Phi3.5-Vision-Instruct version.
 - [ ] Release the LLaVA-Next-LLAMA3-8B version (coming soon).
 - [ ] Release the training scripts and datasets.
+
+## ✏️ Citation
+If you find our paper and code useful in your research, please consider giving a star :star: and citation :pencil:.
+
+```BibTeX
+@misc{wang2024groundedvideollm,
+    title={Grounded-VideoLLM: Sharpening Fine-grained Temporal Grounding in Video Large Language Models},
+    author={Haibo Wang and Zhiyang Xu and Yu Cheng and Shizhe Diao and Yufan Zhou and Yixin Cao and Qifan Wang and Weifeng Ge and Lifu Huang},
+    year={2024},
+    eprint={2410.03290},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
+}
+```
