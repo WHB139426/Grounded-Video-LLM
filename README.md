@@ -4,7 +4,7 @@ This is the official repository for the video large langauge model : **Grounded-
 
 <h5 align="center">
 
-[![arXiv](https://img.shields.io/badge/Arxiv-2311.10122-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2410.03290)
+[![arXiv](https://img.shields.io/badge/Arxiv-2410.03290-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2410.03290)
 [![hf_space](https://img.shields.io/badge/🤗-Open%20In%20Spaces-blue.svg)](https://huggingface.co/WHB139426/Grounded-Video-LLM/tree/main)
 
 </h5>
