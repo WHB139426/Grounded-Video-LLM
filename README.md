@@ -1,6 +1,6 @@
 <h2 align="center"> <a href="https://arxiv.org/abs/2410.03290">Grounded-VideoLLM: Sharpening Fine-grained Temporal Grounding in Video Large Language Models</a></h2>
 
-This is the official repository for the video large langauge model : **Grounded-VideoLLM**, a Video-LLM adept at fine-grained temporal grounding. **Grounded-VideoLLM** not only excels in grounding tasks such as temporal sentence grounding, dense video captioning, and grounded VideoQA, but also shows great potential as a versatile video assistant for general video understanding.
+🌟 This is the official repository for the video large langauge model : **Grounded-VideoLLM**, a Video-LLM adept at fine-grained temporal grounding. **Grounded-VideoLLM** not only excels in grounding tasks such as temporal sentence grounding, dense video captioning, and grounded VideoQA, but also shows great potential as a versatile video assistant for general video understanding.
 
 <h5 align="center">
 
@@ -82,7 +82,7 @@ Grounded-VideoLLM: The man in green clothes was interviewed to provide his persp
 ```
 3. You can change the `prompt_grounding`, `prompt_videoqa`, `video_path` in argparse and run `python inference.py` for your own case.
 
-## 🌟 Grounded-VideoQA dataset
+## 🎬 Grounded-VideoQA dataset
 We provide the Grounded-VideoQA dataset that we annotated with GPT-4o-mini in [[🤗HF](https://huggingface.co/WHB139426/Grounded-Video-LLM/blob/main/G-VideoQA-gpt4o-mini-anno.json)]. You can download the videos following [[ActivityNet](https://activity-net.org/download.html)] and [[QVHighlights](https://github.com/jayleicn/moment_detr)].
 
 ## 👀 TODO List
@@ -104,3 +104,6 @@ If you find our paper and code useful in your research, please consider giving a
     primaryClass={cs.CV}
 }
 ```
+
+## 🤝 Acknowledgement
+[Prismatic-VLMs](https://github.com/TRI-ML/prismatic-vlms), [Phi-3.5-vision-instruct](https://huggingface.co/microsoft/Phi-3.5-vision-instruct), [InternVideo2](https://github.com/OpenGVLab/InternVideo/tree/main/InternVideo2), [LLaVA-Next](https://github.com/LLaVA-VL/LLaVA-NeXT), [TimeChat](https://github.com/RenShuhuai-Andy/TimeChat), [VTimeLLM](https://github.com/huangb23/VTimeLLM).
