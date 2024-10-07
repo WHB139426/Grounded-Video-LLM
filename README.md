@@ -85,7 +85,7 @@ Grounded-VideoLLM: The man in green clothes was interviewed to provide his persp
 ## Grounded-VideoQA dataset
 We provide the Grounded-VideoQA dataset that we annotated with GPT-4o-mini in [[🤗HF](https://huggingface.co/WHB139426/Grounded-Video-LLM/blob/main/G-VideoQA-gpt4o-mini-anno.json)]. You can download the videos following [[ActivityNet](https://activity-net.org/download.html)] and [[QVHighlights](https://github.com/jayleicn/moment_detr)].
 
-## 💡 TODO List
+## 👀 TODO List
 - [x] Release the inference scripts.
 - [x] Release the Phi3.5-Vision-Instruct version.
 - [ ] Release the LLaVA-Next-LLAMA3-8B version (coming soon).
