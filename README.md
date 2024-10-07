@@ -37,7 +37,7 @@ pip install -r requirements.txt
 ```
 
 **Some installation suggestions**
-- We recommend you to pip install `flash-attn==2.3.3` and run the model with `torch.bfloat16`. If your device doesn't support these, you can skip them and replace the argparse parameter in `inference.py` by replacing `attn_implementation` and `dtype`, which may result in subtle numerical difference.
+- We recommend you to pip install `flash-attn==2.3.3` and run the model with `torch.bfloat16`. If your device doesn't support these, you can skip them and replace the argparse parameter `attn_implementation` and `dtype` in `inference.py`, which may result in subtle numerical difference.
 
 ## Prepare the pretrained weights
 
