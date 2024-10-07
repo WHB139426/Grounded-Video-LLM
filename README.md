@@ -70,7 +70,7 @@ https://private-user-images.githubusercontent.com/115783170/373608088-69f83fd7-5
 ```
 USER: Give you a textual query: "The female host wearing purple clothes is reporting news in the studio". When does the described content occur in the video? Please return the start and end timestamps.
 
-Grounded-VideoLLM: From 15.15 seconds to 25.09 seconds.
+Grounded-VideoLLM: From 14.20 seconds to 25.09 seconds.
 
 USER: Give you a textual query: "A sign written with 'NO TRESPASSING LOITERING DRUGS'". When does the described content occur in the video? Please return the start and end timestamps.
 
