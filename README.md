@@ -1,4 +1,3 @@
-<p align="center">
 <h2 align="center"> <a href="https://arxiv.org/abs/2410.03290">Grounded-VideoLLM: Sharpening Fine-grained Temporal Grounding in Video Large Language Models</a></h2>
 <h5 align="center">
 
