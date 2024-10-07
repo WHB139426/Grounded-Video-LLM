@@ -82,7 +82,7 @@ Grounded-VideoLLM: The man in green clothes was interviewed to provide his persp
 ```
 3. You can change the `prompt_grounding`, `prompt_videoqa`, `video_path` in argparse and run `python inference.py` for your own case.
 
-## Grounded-VideoQA dataset
+## 🌟 Grounded-VideoQA dataset
 We provide the Grounded-VideoQA dataset that we annotated with GPT-4o-mini in [[🤗HF](https://huggingface.co/WHB139426/Grounded-Video-LLM/blob/main/G-VideoQA-gpt4o-mini-anno.json)]. You can download the videos following [[ActivityNet](https://activity-net.org/download.html)] and [[QVHighlights](https://github.com/jayleicn/moment_detr)].
 
 ## 👀 TODO List
