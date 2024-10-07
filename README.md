@@ -106,4 +106,4 @@ If you find our paper and code useful in your research, please consider giving a
 ```
 
 ## 🤝 Acknowledgement
-We are grateful for the following awesome projects our Grounded-VideoLLM arising from: [Prismatic-VLMs](https://github.com/TRI-ML/prismatic-vlms), [Phi-3.5-vision-instruct](https://huggingface.co/microsoft/Phi-3.5-vision-instruct), [InternVideo2](https://github.com/OpenGVLab/InternVideo/tree/main/InternVideo2), [LLaVA-Next](https://github.com/LLaVA-VL/LLaVA-NeXT), [TimeChat](https://github.com/RenShuhuai-Andy/TimeChat), [VTimeLLM](https://github.com/huangb23/VTimeLLM).
+We are grateful for the following awesome projects our Grounded-VideoLLM arising from: [Prismatic-VLMs](https://github.com/TRI-ML/prismatic-vlms), [Phi-3.5-vision-instruct](https://huggingface.co/microsoft/Phi-3.5-vision-instruct), [InternVideo2](https://github.com/OpenGVLab/InternVideo/tree/main/InternVideo2), [LLaVA-Next](https://github.com/LLaVA-VL/LLaVA-NeXT), [TimeChat](https://github.com/RenShuhuai-Andy/TimeChat), [VTimeLLM](https://github.com/huangb23/VTimeLLM), [Momentor](https://github.com/DCDmllm/Momentor).
