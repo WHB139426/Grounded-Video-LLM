@@ -449,36 +449,7 @@ class LLAVA_NEXT_VIDEO(nn.Module):
             batch_labels[:, -1] = self.tokenizer.eos_token_id
             batch_attention_mask = batch_attention_mask[:, :self.max_txt_len]
 
-        # for labels in batch_labels:
-        #     print(labels)
-        #     test_labels = []
-        #     for i in labels:
-        #         if i != -100:
-        #             test_labels.append(self.tokenizer.decode(torch.tensor([i]), skip_special_tokens=False))
-        #         else:
-        #             test_labels.append(-100)
-        #     print(test_labels)
-
         return batch_input_ids, batch_labels, batch_attention_mask
-
-    def interpolated_position_embedding(self, samples):
-        if self.llm == 'llama3':
-            skip_len = 1
-        elif self.llm == 'vicuna':
-            skip_len = 2
-
-        time_pos_left_tokens = self.tokenizer(samples['time_pos_left'], return_tensors="pt").input_ids[:, skip_len:].to(self.device) # [bs, num_frames], without BOS token
-        time_pos_right_tokens = self.tokenizer(samples['time_pos_right'], return_tensors="pt").input_ids[:, skip_len:].to(self.device) # [bs, num_frames], without BOS token
-        coefficient_left = samples['coefficient_left'] # [bs, num_frames]
-        coefficient_right = samples['coefficient_right'] # [bs, num_frames]
-        time_pos_left_embeds = self.get_input_embeddings()(time_pos_left_tokens) # [bs, num_frames, 4096]
-        time_pos_right_embeds = self.get_input_embeddings()(time_pos_right_tokens) # [bs, num_frames, 4096]
-
-        time_pos_left_embeds = time_pos_left_embeds*coefficient_left.unsqueeze(-1) # [bs, num_frames, 4096]
-        time_pos_right_embeds = time_pos_right_embeds*coefficient_right.unsqueeze(-1) # [bs, num_frames, 4096]
-        interpolated_time_pos_embeds = time_pos_left_embeds + time_pos_right_embeds # [bs, num_frames, 4096]
-
-        return interpolated_time_pos_embeds
 
     def reshape_hd_patches_2x2merge_phi3(self, image_features, h_crop, w_crop):
         """
@@ -576,13 +547,6 @@ class LLAVA_NEXT_VIDEO(nn.Module):
         hidden_states = nn.AdaptiveAvgPool3d([num_frames_per_seg, pool_size, pool_size])(hidden_states) # [bs*num_segs, 1408, num_frames_per_seg, 4, 4]  
         segment_features = einops.rearrange(hidden_states, '(bs num_segs) d num_frames_per_seg h w -> bs num_segs num_frames_per_seg (h w) d', num_segs=num_segs) # [bs, num_segs, num_frames_per_seg, 16, 1408]
         segment_features = einops.rearrange(segment_features, 'bs num_segs num_frames_per_seg hw d -> bs num_segs (num_frames_per_seg hw) d') # [bs, num_segs, num_frames_per_seg*16, 1408]
-
-
-        # if self.stage == 'grounded' or self.stage == 'sft':
-        #     interpolated_time_pos_embeds = self.interpolated_position_embedding(samples) # [bs, num_frames, 4096]
-        #     segment_features = einops.rearrange(segment_features, 'bs num_segs (num_frames_per_seg hw) d -> bs (num_segs num_frames_per_seg) hw d', num_frames_per_seg=num_frames_per_seg, hw=pool_size*pool_size) # [bs, num_frames, 16, 4096]
-        #     segment_features += interpolated_time_pos_embeds.unsqueeze(2)
-        #     segment_features = einops.rearrange(segment_features, 'bs (num_segs num_frames_per_seg) hw d -> bs num_segs (num_frames_per_seg hw) d', num_segs=num_segs, num_frames_per_seg=num_frames_per_seg, hw=pool_size*pool_size) # [bs, num_segs, num_frames_per_seg*16, 4096]
 
 
         """
