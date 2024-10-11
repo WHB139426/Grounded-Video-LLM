@@ -95,13 +95,11 @@ We provide the Grounded-VideoQA dataset that we annotated with GPT-4o-mini in [[
 If you find our paper and code useful in your research, please consider giving a star :star: and citation :pencil:.
 
 ```BibTeX
-@misc{wang2024groundedvideollm,
-    title={Grounded-VideoLLM: Sharpening Fine-grained Temporal Grounding in Video Large Language Models},
-    author={Haibo Wang and Zhiyang Xu and Yu Cheng and Shizhe Diao and Yufan Zhou and Yixin Cao and Qifan Wang and Weifeng Ge and Lifu Huang},
-    year={2024},
-    eprint={2410.03290},
-    archivePrefix={arXiv},
-    primaryClass={cs.CV}
+@article{wang2024grounded,
+  title={Grounded-VideoLLM: Sharpening Fine-grained Temporal Grounding in Video Large Language Models},
+  author={Wang, Haibo and Xu, Zhiyang and Cheng, Yu and Diao, Shizhe and Zhou, Yufan and Cao, Yixin and Wang, Qifan and Ge, Weifeng and Huang, Lifu},
+  journal={arXiv preprint arXiv:2410.03290},
+  year={2024}
 }
 ```
 
