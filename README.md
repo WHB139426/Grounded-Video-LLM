@@ -79,6 +79,10 @@ Grounded-VideoLLM: From 107.95 seconds to 113.16 seconds.
 USER: Why was the man in green clothes interviewed?
 
 Grounded-VideoLLM: The man in green clothes was interviewed to provide his perspective on the incident and the history of violence in the apartment complex.
+
+USER: Question: What does this TV news report about?\nOptions:\n(A) thievery\n(B) community violence incidents\n(C) fashion show\n(D) aging population
+
+Grounded-VideoLLM: Answer: (B) community violence incidents
 ```
 3. You can change the `prompt_grounding`, `prompt_videoqa`, `video_path` in argparse and run `python inference.py` for your own case.
 

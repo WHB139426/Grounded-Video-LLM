@@ -37,7 +37,7 @@ def parse_args():
 
     # inputs
     parser.add_argument('--prompt_grounding', type=str, default="Give you a textual query: 'The female host wearing purple clothes is reporting news in the studio'. When does the described content occur in the video? Please return the start and end timestamps.")
-    parser.add_argument('--prompt_videoqa', type=str, default="Why was the man in green clothes interviewed?")
+    parser.add_argument('--prompt_videoqa', type=str, default="Question: What does this TV news report about?\nOptions:\n(A) thievery\n(B) community violence incidents\n(C) fashion show\n(D) aging population")
     parser.add_argument('--video_path', type=str, default="./experiments/_3klvlS4W7A.mp4")
 
     # generation
