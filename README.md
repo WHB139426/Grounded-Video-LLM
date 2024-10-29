@@ -20,11 +20,11 @@
 - Discrete temporal tokens enriched with specific time knowledge to represent timestamps. 
 - A multi-stage training scheme, beginning with simple video-captioning tasks and progressively introducing video temporal grounding tasks of increasing complexity. To further enhance the temporal reasoning capability, we also curate a grounded VideoQA dataset by an automatic annotation pipeline. 
 
-## 👀 TODO List
-- [x] Release the inference scripts and pretrained checkpoints.
-- [x] Release the annotated grounded-VideoQA dataset .
-- [x] Release the Phi3.5-Vision-Instruct version.
-- [x] Release the LLaVA-Next-LLAMA3-8B version, with stronger performance in both grounding tasks and general benchmarks.
+## 📰 News
+- [x] **[2024.10.7]** Release the inference scripts and pretrained checkpoints.
+- [x] **[2024.10.7] Release the annotated grounded-VideoQA dataset .
+- [x] **[2024.10.7]** Release the Phi3.5-Vision-Instruct version.
+- [x] **[2024.10.29]** Release the LLaVA-Next-LLAMA3-8B version, with stronger performance in both grounding tasks and general benchmarks.
 - [ ] Release the training scripts and training datasets.
 
 ## 🛠️ Install
