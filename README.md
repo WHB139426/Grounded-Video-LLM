@@ -22,7 +22,7 @@
 
 ## 📰 News
 - [x] **[2024.10.7]** Release the inference scripts and pretrained checkpoints.
-- [x] **[2024.10.7] Release the annotated grounded-VideoQA dataset .
+- [x] **[2024.10.7]** Release the annotated grounded-VideoQA dataset .
 - [x] **[2024.10.7]** Release the Phi3.5-Vision-Instruct version.
 - [x] **[2024.10.29]** Release the LLaVA-Next-LLAMA3-8B version, with stronger performance in both grounding tasks and general benchmarks.
 - [ ] Release the training scripts and training datasets.
