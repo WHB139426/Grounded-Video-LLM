@@ -1,7 +1,8 @@
-weight_path='/home/haibo/weights'
+weight_path='/home/haibo/weight_path'
 
 python inference.py \
     --device cuda:0 \
+    --llm phi3.5 \
     --config_path ${weight_path}/Phi-3.5-vision-instruct \
     --tokenizer_path ${weight_path}/Phi-3.5-mini-instruct \
     --pretrained_video_path ${weight_path}/internvideo/vision-encoder-InternVideo2-stage2_1b-224p-f4.pt \

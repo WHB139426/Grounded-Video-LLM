@@ -119,7 +119,7 @@ class LLAVA_NEXT_VIDEO(nn.Module):
         self.vision_tower = CLIPVisionModel(self.config.vision_config)
         if self.llm == 'llama3' or self.llm == 'vicuna':
             self.vision_tower.load_state_dict(torch.load(os.path.join(pretrained_vision_proj_llm_path, 'vision_model.pth'), map_location='cpu'))
-            self.image_newline = torch.load(os.path.join(pretrained_vision_proj_llm_path, 'image_newlines.pth'), map_location='cpu')['image_newline'].to(self.dtype)
+            self.image_newline = torch.load(os.path.join(pretrained_vision_proj_llm_path, 'image_newline.pth'), map_location='cpu')['image_newline'].to(self.dtype)
         elif self.llm == 'phi3.5':
             self.vision_tower.load_state_dict(torch.load(os.path.join(pretrained_vision_proj_llm_path, 'vision_model.pth'), map_location='cpu'))
             image_newlines = torch.load(os.path.join(pretrained_vision_proj_llm_path, 'image_newlines.pth'), map_location='cpu')

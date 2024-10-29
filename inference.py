@@ -26,7 +26,7 @@ def parse_args():
     parser.add_argument('--num_frames', type=int, default=96)
     parser.add_argument('--num_segs', type=int, default=12)
     parser.add_argument('--lora', type=bool, default=True)
-    parser.add_argument('--attn_implementation', type=str, default="flash_attention_2", choices=['eager', 'flash_attention_2']) # choose 'eager' if you cannot install flash-flash_attention_2-2
+    parser.add_argument('--attn_implementation', type=str, default="flash_attention_2", choices=['eager', 'flash_attention_2']) # choose 'eager' if you cannot install flash_attention_2
 
     # path
     parser.add_argument('--config_path', type=str, default="weight_path/Phi-3.5-vision-instruct")
@@ -120,6 +120,8 @@ def parse_time_interval(text, duration, num_temporal_tokens=300, llm='phi3.5'):
         m = duration * x / num_temporal_tokens
         if llm=='phi3.5':
             return f" {m:.2f} seconds"
+        elif llm=='llama3':
+            return f"{m:.2f} seconds"
     return re.sub(pattern, replace_func, text)
 
 
@@ -163,7 +165,7 @@ if __name__ == '__main__':
     "top_p":args.top_p,
     }
 
-    with torch.cuda.amp.autocast(enabled=True, dtype=model.dtype): # 前后开启autocast
+    with torch.cuda.amp.autocast(enabled=True, dtype=model.dtype):
         with torch.inference_mode():
             pred_texts_grounding = model.generate(samples_grounding, **generate_kwargs)[0]
             pred_texts_videoqa = model.generate(samples_videoqa, **generate_kwargs)[0]

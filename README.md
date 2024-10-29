@@ -20,6 +20,12 @@
 - Discrete temporal tokens enriched with specific time knowledge to represent timestamps. 
 - A multi-stage training scheme, beginning with simple video-captioning tasks and progressively introducing video temporal grounding tasks of increasing complexity. To further enhance the temporal reasoning capability, we also curate a grounded VideoQA dataset by an automatic annotation pipeline. 
 
+## 👀 TODO List
+- [x] Release the inference scripts and pretrained checkpoints.
+- [x] Release the annotated grounded-VideoQA dataset .
+- [x] Release the Phi3.5-Vision-Instruct version.
+- [x] Release the LLaVA-Next-LLAMA3-8B version, with stronger performance in both grounding tasks and general benchmarks.
+- [ ] Release the training scripts and training datasets.
 
 ## 🛠️ Install
 1. Clone this repository and navigate to folder
@@ -40,7 +46,6 @@ pip install -r requirements.txt
 - We recommend you to pip install `flash-attn==2.3.3` and run the model with `torch.bfloat16`. If your device doesn't support these, you can skip them and replace the argparse parameter `attn_implementation` and `dtype` in `inference.py`, which may result in subtle numerical difference.
 
 ## 🤗 Prepare the pretrained weights
-
 Set your own `weight_path` to storage the pretrained weights. The folder should be organized as follows: 
 ```
 ├── Grounded-Video-LLM
@@ -54,6 +59,9 @@ Set your own `weight_path` to storage the pretrained weights. The folder should 
 │   └── Phi-3.5-mini-instruct
 │   └── Phi-3.5-vision-instruct-seperated
 │   └── Phi-3.5-vision-instruct
+│   └── llama3-llava-next-8b
+│   └── llama3-llava-next-8b-seperated
+│   └── Meta-Llama-3-8B-Instruct
 │   └── ckpt
 │   └── internvideo
 │   └──...
@@ -61,9 +69,9 @@ Set your own `weight_path` to storage the pretrained weights. The folder should 
 Download the pretrained weights [[🤗HF](https://huggingface.co/WHB139426/Grounded-Video-LLM/tree/main)] in your own `weight_path`. 
 
 ## 🚀 Qucik Start
-We give a brief example to run the inference code. We recommend GPUs with 24GB memeroy.
-1. replace the parameter `weight_path` in `scripts/inference.sh` with your own weight_path that you set above.
-2. run the command `bash scripts/inference.sh` to reproduce the example below:
+We give a brief example to run the inference code. We recommend GPUs with 24GB memeroy for Phi3.5 version, while 32GB memeroy for LLaVA-Next-LLAMA3-8B version.
+1. replace the parameter `weight_path` in `scripts/inference_phi3_5.sh` or `scripts/inference_llama3.sh` with your own weight_path that you set above.
+2. run the command `bash scripts/inference.sh` or `bash scripts/inference_llama3.sh` to reproduce the example below:
 
 https://private-user-images.githubusercontent.com/115783170/373608088-69f83fd7-59d2-4105-a766-cd712d14d425.mp4
 
@@ -84,16 +92,11 @@ USER: Question: What does this TV news report about?\nOptions:\n(A) thievery\n(B
 
 Grounded-VideoLLM: Answer: (B) community violence incidents
 ```
-3. You can change the `prompt_grounding`, `prompt_videoqa`, `video_path` in argparse and run `python inference.py` for your own case.
+3. You can change the parameter of `prompt_grounding`, `prompt_videoqa`, and `video_path` in `inference.py`'s argparse to run your own case.
 
 ## 🎬 Grounded-VideoQA dataset
 We provide the Grounded-VideoQA dataset that we annotated with GPT-4o-mini in [[🤗HF](https://huggingface.co/datasets/WHB139426/Grounded-VideoLLM/blob/main/G-VideoQA-gpt4o-mini-anno.json)]. You can download the videos following [[ActivityNet](https://activity-net.org/download.html)] and [[QVHighlights](https://github.com/jayleicn/moment_detr)].
 
-## 👀 TODO List
-- [x] Release the inference scripts.
-- [x] Release the Phi3.5-Vision-Instruct version.
-- [ ] Release the LLaVA-Next-LLAMA3-8B version (coming soon).
-- [ ] Release the training scripts and datasets.
 
 ## ✏️ Citation
 If you find our paper and code useful in your research, please consider giving a star :star: and citation :pencil:.

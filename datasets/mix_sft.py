@@ -60,16 +60,13 @@ class MixSFT(Dataset):
         return len(self.video_ids)
 
     def convert_time_position(self, answer, duration):
-        # 定义一个函数，将匹配到的浮点数转换为整数
         def replace_float(match):
             full_match = match.group(0)
-            # 去掉尖括号并将其转换为浮点数
             time = float(full_match.strip('<>'))
             quantized_time = int(self.num_temporal_tokens * time / duration)
+            quantized_time = min(quantized_time, self.num_temporal_tokens)
             return f'<{quantized_time}>'
-        # 使用正则表达式匹配所有的浮点数时间戳
         pattern = r'<-?\d+(\.\d+)?>'
-        # 替换匹配到的浮点数时间戳
         new_answer = re.sub(pattern, replace_float, answer)
         return new_answer
 
