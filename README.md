@@ -38,9 +38,9 @@ cd Grounded-Video-LLM
 ```Shell
 conda create -n grounded-videollm python=3.10.14
 conda activate grounded-videollm
-pip install torch==2.1.2 torchaudio==2.1.2 torchvision==0.16.2 torchdata==0.8.0
+pip install torch==2.1.2 torchaudio==2.1.2 torchvision==0.16.2 torchdata==0.8.0 # to make sure install torch before flash-attn
 pip install -r requirements.txt
-pip install numpy==1.26.4 # should be numpy<2.0
+pip install numpy==1.26.4 # to make sure numpy<2.0
 ```
 
 **Some installation suggestions**
