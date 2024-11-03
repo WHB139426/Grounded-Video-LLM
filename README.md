@@ -77,17 +77,17 @@ We give a brief example to run the inference code. We recommend GPUs with 24GB m
 https://private-user-images.githubusercontent.com/115783170/373608088-69f83fd7-59d2-4105-a766-cd712d14d425.mp4
 
 ```
-\bold{USER} Give you a textual query: "The female host wearing purple clothes is reporting news in the studio". When does the described content occur in the video? Please return the start and end timestamps.
-Grounded-VideoLLM: From 14.20 seconds to 25.09 seconds.
+[USER: ] Give you a textual query: "The female host wearing purple clothes is reporting news in the studio". When does the described content occur in the video? Please return the start and end timestamps.
+[Grounded-VideoLLM: ] From 14.20 seconds to 25.09 seconds.
 
-USER: Give you a textual query: "A sign written with 'NO TRESPASSING LOITERING DRUGS'". When does the described content occur in the video? Please return the start and end timestamps.
-Grounded-VideoLLM: From 107.95 seconds to 113.16 seconds.
+[USER: ] Give you a textual query: "A sign written with 'NO TRESPASSING LOITERING DRUGS'". When does the described content occur in the video? Please return the start and end timestamps.
+[Grounded-VideoLLM: ] From 107.95 seconds to 113.16 seconds.
 
-USER: Why was the man in green clothes interviewed?
-Grounded-VideoLLM: The man in green clothes was interviewed to provide his perspective on the incident and the history of violence in the apartment complex.
+[USER: ] Why was the man in green clothes interviewed?
+[Grounded-VideoLLM: ] The man in green clothes was interviewed to provide his perspective on the incident and the history of violence in the apartment complex.
 
-USER: Question: What does this TV news report about?\nOptions:\n(A) thievery\n(B) community violence incidents\n(C) fashion show\n(D) aging population
-Grounded-VideoLLM: Answer: (B) community violence incidents
+[USER: ] Question: What does this TV news report about?\nOptions:\n(A) thievery\n(B) community violence incidents\n(C) fashion show\n(D) aging population
+[Grounded-VideoLLM: ] Answer: (B) community violence incidents
 ```
 3. You can change the parameter of `prompt_grounding`, `prompt_videoqa`, and `video_path` in `inference.py`'s argparse to run your own case.
 
