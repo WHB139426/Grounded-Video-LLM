@@ -28,11 +28,11 @@
 - [ ] Release the training scripts and training datasets.
 
 ## Performance
-| Model Name                | LLM | Charades-STA (R@0.3/R@0.5/R@0.7/mIoU) | ActivityNet-Groudning (R@0.3/R@0.5/R@0.7/mIoU) | ActivityNet-Captions (SODA_c/METEOR) | MVbench | Video-MME (w/o subs) |
-|---------------------------|-----|---------------------------------------|------------------------------------------------|--------------------------------------|---------|----------------------|
-| Grounded-VideoLLM         | Phi3.5-3.8B      | 54.2/36.4/19.7/36.8 | 46.2/30.3/19.0/36.1 | 6.0/6.8 | 59.4 | - |
-| Grounded-VideoLLM (*)     | Phi3.5-3.8B      | 70.2/55.9/33.2/49.4 | 64.7/47.6/30.1/47.0 | -       | 60.0 | - |
-| Grounded-VideoLLM (*)     | LLaMA3-8B        | -                   | -                   | -       | -    | - |
+| Model Name                | LLM | Charades-STA (R@0.3/R@0.5/R@0.7/mIoU) | ActivityNet-Groudning (R@0.3/R@0.5/R@0.7/mIoU) | ActivityNet-Captions (SODA_c/METEOR) | NEXT-GQA (GQA/mIoP/IoP@0.5) | MVbench | Video-MME (w/o subs) |
+|---------------------------|-----|---------------------------------------|------------------------------------------------|--------------------------------------|-----------------------------|----------------------|
+| Grounded-VideoLLM         | Phi3.5-3.8B      | 54.2/36.4/19.7/36.8 | 46.2/30.3/19.0/36.1 | 26.7/34.5/34.4 | 6.0/6.8 | 59.4 | - |
+| Grounded-VideoLLM (*)     | Phi3.5-3.8B      | 70.2/55.9/33.2/49.4 | 64.7/47.6/30.1/47.0 | 26.7/34.5/34.4 | -       | 60.0 | - |
+| Grounded-VideoLLM (*)     | LLaMA3-8B        | -                   | -                   | 26.7/34.5/34.4 | -       | -    | - |
 - *means we incorporate the training set of Charades-STA and ActivityNet into the third training stage.
 
 ## 🛠️ Install
