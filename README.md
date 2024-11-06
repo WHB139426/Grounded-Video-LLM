@@ -21,17 +21,17 @@
 - A multi-stage training scheme, beginning with simple video-captioning tasks and progressively introducing video temporal grounding tasks of increasing complexity. To further enhance the temporal reasoning capability, we also curate a grounded VideoQA dataset by an automatic annotation pipeline. 
 
 ## 📰 News
-- [x] **[2024.10.7]** Release the inference scripts and pretrained checkpoints.
-- [x] **[2024.10.7]** Release the annotated grounded-VideoQA dataset .
-- [x] **[2024.10.7]** Release the Phi3.5-Vision-Instruct version.
+- [x] **[2024.10.4]** Release the inference scripts and pretrained checkpoints.
+- [x] **[2024.10.4]** Release the annotated grounded-VideoQA dataset .
+- [x] **[2024.10.4]** Release the Phi3.5-Vision-Instruct version.
 - [x] **[2024.10.29]** Release the LLaVA-Next-LLAMA3-8B version, with stronger performance in both grounding tasks and general benchmarks.
 - [ ] Release the training scripts and training datasets. We will try to adapt more MLLMs as the base model for Grounded-VideoLLM in future.
 
 <!-- ## Performance
-| Model Name                | LLM | Charades-STA (R1@0.3/R1@0.5/R1@0.7/mIoU) | ActivityNet-Groudning (R1@0.3/R1@0.5/R1@0.7/mIoU) | ActivityNet-Captions (SODA_c/METEOR) | NEXT-GQA (GQA/mIoP/IoP@0.5) | MVbench | Video-MME (w/o subs) |
+| Model Name                | LLM | Charades-STA (R1@0.3/R1@0.5/R1@0.7/mIoU) | ActivityNet-Groudning (R1@0.3/R1@0.5/R1@0.7/mIoU) | ActivityNet-Captions (SODA_c/METEOR) | NEXT-GQA (GQA/mIoP/mIoU) | MVbench | Video-MME (w/o subs) |
 |---------------------------|-----|---------------------------------------|------------------------------------------------|--------------------------------------|-----------------------------|----------------------|----------------------|
-| Grounded-VideoLLM         | Phi3.5-3.8B      | 54.2/36.4/19.7/36.8 | 46.2/30.3/19.0/36.1 | 6.0/6.8 | 26.7/34.5/34.4 | 59.4 | 47.7 |
-| Grounded-VideoLLM (*)     | Phi3.5-3.8B      | 70.2/55.9/33.2/49.4 | 64.9/47.8/30.4/47.2 | 6.6/6.5 | 29.4/37.4/36.3 | 60.0 | 48.1 |
+| Grounded-VideoLLM         | Phi3.5-3.8B      | 54.2/36.4/19.7/36.8 | 46.2/30.3/19.0/36.1 | 6.0/6.8 | 26.7/34.5/21.1 | 59.4 | 47.7 |
+| Grounded-VideoLLM (*)     | Phi3.5-3.8B      | 70.2/55.9/33.2/49.4 | 64.9/47.8/30.4/47.2 | 6.6/6.5 | 29.4/37.4/27.0 | 60.0 | 48.1 |
 | Grounded-VideoLLM (*)     | LLaMA3-8B        | -                   | -                   | -       |  -             | -    | -    |
 - *means we incorporate a sub training set of Charades-STA and ActivityNet into the third training stage. Please refer to our paper for more results. -->
 
