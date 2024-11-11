@@ -16,4 +16,4 @@ torchdata==0.8.0
 torchvision==0.16.2
 tqdm==4.66.5
 transformers==4.40.1
-wandb==0.18.5
+wandb==0.18.6

@@ -27,13 +27,13 @@
 - [x] **[2024.10.29]** Release the LLaVA-Next-LLAMA3-8B version, with stronger performance in both grounding tasks and general benchmarks.
 - [ ] Release the training scripts and training datasets. We will try to adapt more MLLMs as the base model for Grounded-VideoLLM in future.
 
-<!-- ## Performance
+## Performance
 | Model Name                | LLM | Charades-STA (R1@0.3/R1@0.5/R1@0.7/mIoU) | ActivityNet-Groudning (R1@0.3/R1@0.5/R1@0.7/mIoU) | ActivityNet-Captions (SODA_c/METEOR) | NEXT-GQA (GQA/mIoP/mIoU) | MVbench | Video-MME (w/o subs) |
 |---------------------------|-----|---------------------------------------|------------------------------------------------|--------------------------------------|-----------------------------|----------------------|----------------------|
 | Grounded-VideoLLM         | Phi3.5-3.8B      | 54.2/36.4/19.7/36.8 | 46.2/30.3/19.0/36.1 | 6.0/6.8 | 26.7/34.5/21.1 | 59.4 | 47.7 |
 | Grounded-VideoLLM (*)     | Phi3.5-3.8B      | 70.2/55.9/33.2/49.4 | 64.9/47.8/30.4/47.2 | 6.6/6.5 | 29.4/37.4/27.0 | 60.0 | 48.1 |
-| Grounded-VideoLLM (*)     | LLaMA3-8B        | -                   | -                   | -       |  -             | -    | -    |
-- *means we incorporate a sub training set of Charades-STA and ActivityNet into the third training stage. Please refer to our paper for more results. -->
+<!-- | Grounded-VideoLLM (*)     | LLaMA3-8B        | -                   | -                   | -       |  -             | -    | -    | -->
+- *means we incorporate a sub training set of Charades-STA and ActivityNet into the third training stage. Please refer to our paper for more results.
 
 ## 🛠️ Install
 1. Clone this repository and navigate to folder
@@ -80,7 +80,7 @@ Download the pretrained weights [[🤗HF](https://huggingface.co/WHB139426/Groun
 ## 🚀 Qucik Start
 We give a brief example to run the inference code. We recommend GPUs with 24GB memeroy for Phi3.5 version, while 32GB memeroy for LLaVA-Next-LLAMA3-8B version.
 1. replace the parameter `weight_path` in `scripts/inference_phi3_5.sh` or `scripts/inference_llama3.sh` with your own weight_path that you set above.
-2. run the command `bash scripts/inference.sh` or `bash scripts/inference_llama3.sh` to reproduce the example below:
+2. run the command `bash scripts/inference_phi3_5.sh` or `bash scripts/inference_llama3.sh` to reproduce the example below:
 
 https://private-user-images.githubusercontent.com/115783170/373608088-69f83fd7-59d2-4105-a766-cd712d14d425.mp4
 
