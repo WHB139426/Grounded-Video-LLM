@@ -33,7 +33,7 @@
 | Grounded-VideoLLM         | Phi3.5-3.8B      | 54.2/36.4/19.7/36.8 | 46.2/30.3/19.0/36.1 | 6.0/6.8 | 26.7/34.5/21.1 | 59.4 | 47.7 |
 | Grounded-VideoLLM (*)     | Phi3.5-3.8B      | 70.2/55.9/33.2/49.4 | 64.9/47.8/30.4/47.2 | 6.6/6.5 | 29.4/37.4/27.0 | 60.0 | 48.1 |
 <!-- | Grounded-VideoLLM (*)     | LLaMA3-8B        | -                   | -                   | -       |  -             | -    | -    | -->
-- *means we incorporate a sub training set of Charades-STA and ActivityNet into the third training stage. Please refer to our paper for more results.
+- (*) means we incorporate a sub training set of Charades-STA and ActivityNet into the third training stage. Please refer to our paper for more results.
 
 ## 🛠️ Install
 1. Clone this repository and navigate to folder
