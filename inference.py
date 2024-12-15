@@ -38,6 +38,7 @@ def parse_args():
     # inputs
     parser.add_argument('--prompt_grounding', type=str, default="Give you a textual query: 'The female host wearing purple clothes is reporting news in the studio'. When does the described content occur in the video? Please return the start and end timestamps.")
     parser.add_argument('--prompt_videoqa', type=str, default="Question: What does this TV news report about?\nOptions:\n(A) thievery\n(B) community violence incidents\n(C) fashion show\n(D) aging population")
+    parser.add_argument('--prompt_referring', type=str, default="What is happening from 70 seconds to 80 seconds?")
     parser.add_argument('--video_path', type=str, default="./experiments/_3klvlS4W7A.mp4")
 
     # generation
@@ -61,24 +62,7 @@ def init_seeds(seed=42, cuda_deterministic=True):
         cudnn.deterministic = False
         cudnn.benchmark = True
 
-def create_inputs(args, grounding_token):
-    """
-    text_input
-    """
-    chat_template = {'phi3.5': Phi_3_5_Template(), 'llama3': LLaMA3_Template(), 'vicuna': Vicuna_Template()}[args.llm]
-    if grounding_token:
-        conv = [
-            {"from": "human", "value": DEFAULT_IMAGE_TOKEN + ' ' + GROUNDING_TOKEN + '\n'+args.prompt_grounding},
-            {"from": "gpt", "value": ''}                
-        ]
-    else:
-        conv = [
-            {"from": "human", "value": DEFAULT_IMAGE_TOKEN + '\n'+ args.prompt_videoqa},
-            {"from": "gpt", "value": ''}                
-        ]
-    sep, eos = chat_template.separator.apply()
-    prompt = chat_template.encode(conv).replace(eos, '')
-
+def create_inputs(args, mode):
     """
     video_input
     """
@@ -102,6 +86,31 @@ def create_inputs(args, grounding_token):
         spatial_pixel_values.append(image_processor(pixel_values[i_spatial]))
     spatial_pixel_values = torch.tensor(np.array(spatial_pixel_values)) # [num_segs, 3, 336, 336]
     spatial_pixel_values = spatial_pixel_values.unsqueeze(0)
+
+    """
+    text_input
+    """
+    assert mode in ['qa', 'grounding', 'referring']
+    chat_template = {'phi3.5': Phi_3_5_Template(), 'llama3': LLaMA3_Template(), 'vicuna': Vicuna_Template()}[args.llm]
+    if mode == 'grounding':
+        conv = [
+            {"from": "human", "value": DEFAULT_IMAGE_TOKEN + ' ' + GROUNDING_TOKEN + '\n'+args.prompt_grounding},
+            {"from": "gpt", "value": ''}                
+        ]
+    elif mode == 'qa':
+        conv = [
+            {"from": "human", "value": DEFAULT_IMAGE_TOKEN + '\n'+ args.prompt_videoqa},
+            {"from": "gpt", "value": ''}                
+        ]
+    elif mode == 'referring':
+        query = args.prompt_referring
+        query = re.sub(r'(\d+) seconds', lambda m: f"<{int(float(m.group(1))/duration*args.num_temporal_tokens)}>", query)
+        conv = [
+            {"from": "human", "value": DEFAULT_IMAGE_TOKEN + '\n'+ query},
+            {"from": "gpt", "value": ''}                
+        ]
+    sep, eos = chat_template.separator.apply()
+    prompt = chat_template.encode(conv).replace(eos, '')
 
     samples = {
             "video_ids": [args.video_path],
@@ -154,8 +163,9 @@ if __name__ == '__main__':
     model.eval()
     model.to(args.device)
 
-    samples_grounding, duration_grounding = create_inputs(args, True)
-    samples_videoqa, duration_videoqa = create_inputs(args, False)
+    samples_grounding, duration_grounding = create_inputs(args, 'grounding')
+    samples_videoqa, duration_videoqa = create_inputs(args, 'qa')
+    samples_referring, duration_referring = create_inputs(args, 'referring')
 
     generate_kwargs = {
     "do_sample": args.do_sample,
@@ -169,10 +179,15 @@ if __name__ == '__main__':
         with torch.inference_mode():
             pred_texts_grounding = model.generate(samples_grounding, **generate_kwargs)[0]
             pred_texts_videoqa = model.generate(samples_videoqa, **generate_kwargs)[0]
+            pred_texts_referring = model.generate(samples_referring, **generate_kwargs)[0]
 
     print('\n******grounding example******')
     print(samples_grounding['prompts'][0])
     print(parse_time_interval(pred_texts_grounding, duration_grounding, args.num_temporal_tokens, args.llm))
+
+    print('\n******referring example******')
+    print(samples_referring['prompts'][0])
+    print(pred_texts_referring)
 
     print('\n******videoqa example******')
     print(samples_videoqa['prompts'][0])

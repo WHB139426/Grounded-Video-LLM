@@ -91,13 +91,16 @@ https://private-user-images.githubusercontent.com/115783170/373608088-69f83fd7-5
 [USER] Give you a textual query: "A sign written with 'NO TRESPASSING LOITERING DRUGS'". When does the described content occur in the video? Please return the start and end timestamps.
 [Grounded-VideoLLM] From 107.95 seconds to 113.16 seconds.
 
+[USER] What is happening from 70 seconds to 80 seconds?
+[Grounded-VideoLLM] A woman with glasses and a red shirt is talking to a reporter.
+
 [USER] Why was the man in green clothes interviewed?
 [Grounded-VideoLLM] The man in green clothes was interviewed to provide his perspective on the incident and the history of violence in the apartment complex.
 
 [USER] Question: What does this TV news report about?\nOptions:\n(A) thievery\n(B) community violence incidents\n(C) fashion show\n(D) aging population
 [Grounded-VideoLLM] Answer: (B) community violence incidents
 ```
-3. You can change the parameter of `prompt_grounding`, `prompt_videoqa`, and `video_path` in `inference.py`'s argparse to run your own case.
+3. You can change the parameter of `prompt_grounding`, `prompt_videoqa`, `prompt_referring` and `video_path` in `inference.py`'s argparse to run your own case.
 
 ## 🎬 Grounded-VideoQA dataset
 We provide the Grounded-VideoQA dataset that we annotated with GPT-4o-mini in [[🤗HF](https://huggingface.co/datasets/WHB139426/Grounded-VideoLLM/blob/main/G-VideoQA-gpt4o-mini-anno.json)]. You can download the videos following [[ActivityNet](https://activity-net.org/download.html)] and [[QVHighlights](https://github.com/jayleicn/moment_detr)].
