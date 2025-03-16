@@ -202,10 +202,7 @@ class TrainingStrategy(ABC):
 
         curr_epoch = 0
         gone_steps = 0
-        if not self.args.not_two_stream:
-            resume_state_path = self.args.save_dir + f'/{self.args.stage}_{self.args.model}_{self.args.llm}_{self.args.dataset}_state_dict_resume.pth'
-        else:
-            resume_state_path = self.args.save_dir + f'/{self.args.stage}_{self.args.model}_{self.args.llm}_{self.args.dataset}_state_dict_resume_not_two_stream.pth'            
+        resume_state_path = self.args.save_dir + f'/{self.args.stage}_{self.args.model}_{self.args.llm}_{self.args.dataset}_state_dict_resume.pth'
 
         # Max Steps vs. Epochs Computation
         steps_per_epoch = len(dataloader) // self.grad_accumulation_steps
@@ -270,8 +267,14 @@ class TrainingStrategy(ABC):
                             "text_inputs": batch['text_inputs'],
                             "temporal_pixel_values":batch['temporal_pixel_values'],
                             "spatial_pixel_values": batch['spatial_pixel_values'],
+
+                            # "time_pos_left": batch['time_pos_left'] if 'time_pos_left' in batch.keys() else 'N/A.',
+                            # "time_pos_right": batch['time_pos_right'] if 'time_pos_right' in batch.keys() else 'N/A.',
+                            # "coefficient_left": batch['coefficient_left'] if 'coefficient_left' in batch.keys() else 'N/A.',
+                            # "coefficient_right": batch['coefficient_right'] if 'coefficient_right' in batch.keys() else 'N/A.',
                             }
 
+                        # print(train_idx, batch['text_inputs'], batch['video_ids'], batch['question_ids'], batch['dataset_names'])
 
                         outputs = self.vlm(samples)
                         loss = outputs['loss']

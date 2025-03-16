@@ -25,7 +25,7 @@
 - [x] **[2024.10.4]** Release the annotated grounded-VideoQA dataset .
 - [x] **[2024.10.4]** Release the Phi3.5-Vision-Instruct version.
 - [x] **[2024.10.29]** Release the LLaVA-Next-LLAMA3-8B version, with stronger performance in both grounding tasks and general benchmarks.
-- [ ] Release the training scripts and training datasets. We will try to adapt more MLLMs as the base model for Grounded-VideoLLM in future.
+- [x] Release the training scripts and training datasets. We will try to adapt more MLLMs as the base model for Grounded-VideoLLM in future.
 
 ## Performance
 | Model Name                | LLM | Charades-STA (R1@0.3/R1@0.5/R1@0.7/mIoU) | ActivityNet-Groudning (R1@0.3/R1@0.5/R1@0.7/mIoU) | ActivityNet-Captions (SODA_c/METEOR) | NEXT-GQA (GQA/mIoP/mIoU) | MVbench | Video-MME (w/o subs) |
@@ -105,6 +105,23 @@ https://private-user-images.githubusercontent.com/115783170/373608088-69f83fd7-5
 ## 🎬 Grounded-VideoQA dataset
 We provide the Grounded-VideoQA dataset that we annotated with GPT-4o-mini in [[🤗HF](https://huggingface.co/datasets/WHB139426/Grounded-VideoLLM/blob/main/G-VideoQA-gpt4o-mini-anno.json)]. You can download the videos following [[ActivityNet](https://activity-net.org/download.html)] and [[QVHighlights](https://github.com/jayleicn/moment_detr)].
 
+## 🎬 Training Grounded-VideoLLM from scratch
+
+1. Prepare your training data
+Set your own `data_path` in th following .sh files to storage the data before running the commands (You can choose to only download the specific data you want by modifying the following scripts): 
+```Shell
+bash scripts/download_data_stage1.sh
+bash scripts/download_data_stage2.sh
+bash scripts/download_data_stage2.sh
+```
+
+2. Set up the `data_dir` and `weight_path` in `scripts/phi3.5_xxx_8_a100.sh` where `xxx` can be [`pretrain`, `grounded`, `sft`], and then run the following commands:
+```Shell
+bash scripts/phi3.5_pretrain.sh
+bash scripts/phi3.5_grounded.sh
+bash scripts/phi3.5_sft.sh
+```
+The checkpoints will be saved at `./experiments`
 
 ## ✏️ Citation
 If you find our paper and code useful in your research, please consider giving a star :star: and citation :pencil:.

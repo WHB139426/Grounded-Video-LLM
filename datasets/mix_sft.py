@@ -4,6 +4,7 @@ import torch
 import sys
 import os
 import re
+import random
 sys.path.append(os.path.abspath(os.path.join(__file__, "..", "..")))
 from mm_utils.utils import *
 from mm_utils.video_utils import read_frames_decord, read_frames_av
@@ -13,14 +14,13 @@ from datasets.chat.base_template import LLaMA3_Template, Vicuna_Template, Phi_3_
 class MixSFT(Dataset):
     def __init__(
         self,
-        anno_path = "data_path/mix_sft/mix_sft.json",
-        video_path = "data_path",
+        anno_path = "/home/haibo/data/mix_sft/mix_sft.json",
+        video_path = "/home/haibo/data",
         num_frames = 96,
         num_segs = 12,
         num_temporal_tokens = 300,
         sample='rand',
-        llm='llama3',
-        not_two_stream=False,
+        llm='phi3.5',
     ):
         self.video_path = video_path
         self.num_frames = num_frames

@@ -1,24 +1,32 @@
 from torch.utils.data import Dataset
+import random
 import numpy as np
 import torch
+from tqdm import tqdm
+from PIL import Image
+import pickle
 import sys
 import os
+import requests
+from collections import Counter
+from io import BytesIO
+import json
+import cv2
 sys.path.append(os.path.abspath(os.path.join(__file__, "..", "..")))
 from mm_utils.utils import *
 from mm_utils.video_utils import read_frames_decord, read_frames_av
-from datasets.chat.base_template import LLaMA3_Template, Vicuna_Template, Phi_3_5_Template, DEFAULT_IMAGE_TOKEN
-
+from datasets.chat.base_template import LLaMA3_Template, Vicuna_Template, Phi_3_5_Template
 
 class MixPretrain(Dataset):
     def __init__(
         self,
-        anno_path = "data_path/mix_pretrain/mix_pretrain.json",
-        video_path = "data_path",
+        anno_path = "/home/haibo/data/mix_pretrain/mix_pretrain.json",
+        video_path = "/home/haibo/data",
         num_frames = 96,
         num_segs = 12,
-        num_temporal_tokens = 500,
+        num_temporal_tokens = 300,
         sample='rand',
-        llm='llama3',
+        llm='phi3.5',
     ):
         self.video_path = video_path
         self.num_frames = num_frames
@@ -87,7 +95,7 @@ class MixPretrain(Dataset):
                     sample = self.sample,
                 )
                 conversations = [
-                    {"from": "human", "value": DEFAULT_IMAGE_TOKEN+'\n'+"Provide an overview of what happens."},
+                    {"from": "human", "value": "<image>\n"+"Provide an overview of what happens."},
                     {"from": "gpt", "value": "A man silently narrates his experience driving an audi."}
                 ]
                 text_input = self.chat_template.encode(conversations)
@@ -112,3 +120,13 @@ class MixPretrain(Dataset):
                 "spatial_pixel_values": spatial_pixel_values,
                 "dataset_names": dataset_name,
             }
+
+# dataset = MixPretrain(llm='phi3.5')
+# for i in range(10):
+#     entry = random.choice(dataset)
+#     print(entry['question_ids'], entry['video_ids'], entry['dataset_names'])
+#     print("text_inputs: ",             entry['text_inputs'])
+#     print("temporal_pixel_values: ",             entry['temporal_pixel_values'].shape)
+#     print("spatial_pixel_values: ",             entry['spatial_pixel_values'].shape)
+#     print()
+# print(len(dataset))

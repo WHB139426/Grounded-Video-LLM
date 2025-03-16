@@ -1,9 +1,18 @@
 from torch.utils.data import Dataset
+import random
 import numpy as np
 import torch
+from tqdm import tqdm
+from PIL import Image
+import pickle
 import sys
 import os
-import re
+import requests
+from collections import Counter
+from io import BytesIO
+import json
+import numpy as np
+import cv2
 sys.path.append(os.path.abspath(os.path.join(__file__, "..", "..")))
 from mm_utils.utils import *
 from mm_utils.video_utils import read_frames_decord, read_frames_av
@@ -12,13 +21,13 @@ from datasets.chat.base_template import LLaMA3_Template, Vicuna_Template, Phi_3_
 class MixGrounded(Dataset):
     def __init__(
         self,
-        anno_path = "data_path/mix_grounded/mix_grounded.json",
-        video_path = "data_path",
+        anno_path = "/home/haibo/data/mix_grounded/mix_grounded.json",
+        video_path = "/home/haibo/data",
         num_frames = 96,
         num_segs = 12,
         num_temporal_tokens = 300,
         sample='rand',
-        llm='llama3',
+        llm='phi3.5',
     ):
         self.video_path = video_path
         self.num_frames = num_frames
@@ -67,12 +76,15 @@ class MixGrounded(Dataset):
         return convs
     
     def convert_time_position(self, answer, duration):
+        # 定义一个函数，将匹配到的浮点数转换为整数
         def replace_float(match):
             full_match = match.group(0)
+            # 去掉尖括号并将其转换为浮点数
             time = float(full_match.strip('<>'))
             quantized_time = int(self.num_temporal_tokens * time / duration)
             quantized_time = min(quantized_time, self.num_temporal_tokens)
             return f'<{quantized_time}>'
+        # 使用正则表达式匹配所有的浮点数时间戳
         pattern = r'<-?\d+(\.\d+)?>'
         # 替换匹配到的浮点数时间戳
         new_answer = re.sub(pattern, replace_float, answer)
@@ -113,7 +125,7 @@ class MixGrounded(Dataset):
                     sample = self.sample,
                 )
                 conversations = [
-                    {"from": "human", "value": DEFAULT_IMAGE_TOKEN+'\n'+"Provide an overview of what happens."},
+                    {"from": "human", "value": "<image>\n"+"Provide an overview of what happens."},
                     {"from": "gpt", "value": "A man silently narrates his experience driving an audi."}
                 ]
                 text_input = self.chat_template.encode(conversations)
@@ -130,7 +142,6 @@ class MixGrounded(Dataset):
             spatial_pixel_values.append(self.image_processor(pixel_values[i_spatial]))
         spatial_pixel_values = torch.tensor(np.array(spatial_pixel_values)) # [num_segs, 3, 336, 336]
 
-
         return {
                 "video_ids": video_id,
                 "question_ids": question_id,
@@ -139,6 +150,16 @@ class MixGrounded(Dataset):
                 "spatial_pixel_values": spatial_pixel_values,
                 "dataset_names": dataset_name,
                 "durations": float(duration),
-
             }
 
+
+
+# dataset = MixGrounded(llm='phi3.5')
+# for i in range(10):
+#     entry = random.choice(dataset)
+#     print(entry['question_ids'], entry['video_ids'], entry['dataset_names'], entry['durations'])
+#     print("text_inputs: ",             entry['text_inputs'])
+#     print("temporal_pixel_values: ",             entry['temporal_pixel_values'].shape)
+#     print("spatial_pixel_values: ",             entry['spatial_pixel_values'].shape)
+#     print()
+# print(len(dataset))

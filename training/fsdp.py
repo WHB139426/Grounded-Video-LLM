@@ -124,8 +124,6 @@ class FSDPStrategy(TrainingStrategy):
                 file_name = '_'.join(self.trainable_module_keys)
                 if resume:
                     file_name = file_name + '_resume'
-                if self.args.not_two_stream:
-                    file_name = file_name + '_not_two_stream'
                 torch.save({"model": model_state_dicts}, f"{run_dir}/{self.args.stage}_{self.args.model}_{self.args.llm}_{self.args.dataset}_{file_name}.pth")
 
     def run_setup(self, n_train_examples: int) -> None:
@@ -231,11 +229,7 @@ class FSDPStrategy(TrainingStrategy):
                     {"params": video_proj, "weight_decay": 0.0, "lr": self.args.lr}, 
                     {"params": lm_head, "weight_decay": 0.0, "lr": self.args.lr}, 
                     {"params": embed_tokens, "weight_decay": 0.0, "lr": self.args.lr}, 
-                    ]         
-                if self.args.lora:
-                    groups.append(
-                        {"params": lora, "weight_decay": 0.0, "lr": self.args.lora_lr},
-                    )
+                    ]      
             elif self.args.stage == 'sft':
                 groups = [
                     {"params": mm_proj, "weight_decay": 0.0, "lr": self.args.lr},
@@ -243,16 +237,16 @@ class FSDPStrategy(TrainingStrategy):
                     {"params": lm_head, "weight_decay": 0.0, "lr": self.args.lr}, 
                     {"params": embed_tokens, "weight_decay": 0.0, "lr": self.args.lr}, 
                     ]                          
-                if self.args.lora:
-                    groups.append(
-                        {"params": lora, "weight_decay": 0.0, "lr": self.args.lora_lr},
-                    )      
             else:
                 groups = [
                     {"params": decay, "weight_decay": self.weight_decay}, 
                     {"params": no_decay, "weight_decay": 0.0},
                     ]
 
+            if self.args.lora:
+                groups.append(
+                    {"params": lora, "weight_decay": 0.0, "lr": self.args.lora_lr},
+                )
             # Create Optimizer & LR Scheduler
             self.optimizer = AdamW(groups, lr=self.learning_rate)
             self.lr_scheduler = get_cosine_schedule_with_warmup(self.optimizer, num_warmup_steps, num_training_steps)
