@@ -117,9 +117,9 @@ bash scripts/download_data_stage2.sh
 
 2. Set up the `data_dir` and `weight_path` in `scripts/phi3.5_xxx_8_a100.sh` where `xxx` can be [`pretrain`, `grounded`, `sft`], and then run the following commands:
 ```Shell
-bash scripts/phi3.5_pretrain.sh
-bash scripts/phi3.5_grounded.sh
-bash scripts/phi3.5_sft.sh
+bash scripts/phi3.5_pretrain_8_a100.sh
+bash scripts/phi3.5_grounded_8_a100.sh
+bash scripts/phi3.5_sft_8_a100.sh
 ```
 The checkpoints will be saved at `./experiments`
 

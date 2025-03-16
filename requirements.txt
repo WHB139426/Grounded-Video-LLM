@@ -1,7 +1,7 @@
-accelerate==0.32.1
-av==12.2.0
+accelerate==1.0.1
+av==13.1.0
 decord==0.6.0
-draccus==0.8.0
+draccus==0.10.0
 einops==0.8.1
 flash_attn==2.3.3
 jsonlines==4.0.0
@@ -9,13 +9,13 @@ matplotlib==3.10.1
 numpy==2.2.3
 opencv_python==4.10.0.84
 pandas==2.2.3
-peft==0.3.0
+peft==0.13.2
 Pillow==11.1.0
 Requests==2.32.3
 timm==1.0.15
 torch==2.1.2
 torchdata==0.8.0
 torchvision==0.16.2
-tqdm==4.66.4
-transformers==4.40.1
+tqdm==4.66.5
+transformers==4.46.0
 wandb==0.19.8
