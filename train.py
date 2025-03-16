@@ -27,7 +27,7 @@ def parse_args():
     parser.add_argument('--num_temporal_tokens', type=int, default=300)
     parser.add_argument('--num_frames', type=int, default=96)
     parser.add_argument('--num_segs', type=int, default=12)
-    parser.add_argument('--stage', type=str, default="sft", choices=['pretrain', 'grounded', 'sft', 'grounded_wo_token'])
+    parser.add_argument('--stage', type=str, default="sft", choices=['pretrain', 'grounded', 'sft'])
     parser.add_argument('--lora', action='store_true')
     parser.add_argument('--attn_implementation', type=str, default="flash_attention_2", choices=['eager', 'flash_attention_2']) # choose 'eager' if you cannot install flash_attention_2
 
@@ -114,7 +114,7 @@ def pretrain(args) -> None:
         model.multi_modal_projector.to(model.dtype)
         model.video_projecter.to(model.dtype)
 
-        if args.stage in ['grounded'] and len(args.pretrained_proj) > 0 and args.llm in args.pretrained_proj:
+        if args.stage in ['grounded', 'sft'] and len(args.pretrained_proj) > 0 and args.llm in args.pretrained_proj:
             ckpt = torch.load(args.pretrained_proj, map_location='cpu')['model']
             if 'multi_modal_projector' in ckpt.keys():
                 model.multi_modal_projector.load_state_dict(ckpt['multi_modal_projector'])
@@ -122,15 +122,6 @@ def pretrain(args) -> None:
                 model.video_projecter.load_state_dict(ckpt['video_projecter'])
             if 'language_model' in ckpt.keys():
                 model.language_model.load_state_dict(ckpt['language_model'])
-
-        elif args.stage=='sft' and len(args.pretrained_proj) > 0 and args.llm in args.pretrained_proj:
-            ckpt = torch.load(args.pretrained_proj, map_location='cpu')['model']
-            if 'multi_modal_projector' in ckpt.keys():
-                model.multi_modal_projector.load_state_dict(ckpt['multi_modal_projector'])
-            if 'video_projecter' in ckpt.keys():
-                model.video_projecter.load_state_dict(ckpt['video_projecter'])
-            if 'language_model' in ckpt.keys():
-                model.language_model.load_state_dict(ckpt['language_model'])  
 
     if overwatch.is_rank_zero():
         print(get_parameter_number(model))
@@ -141,33 +132,33 @@ def pretrain(args) -> None:
         from datasets.mix_pretrain import MixPretrain
         train_dataset = MixPretrain(
         anno_path = os.path.join(args.data_dir, 'mix_pretrain/mix_pretrain.json'),
-        video_path = "args.data_dir",
+        video_path = args.data_dir,
         num_frames = args.num_frames,
         num_segs = args.num_segs,
         num_temporal_tokens = args.num_temporal_tokens,
-        sample='rand',
+        sample='middle',
         llm=args.llm,
         )
     elif args.dataset == 'mix_grounded':
         from datasets.mix_grounded import MixGrounded
         train_dataset = MixGrounded(
         anno_path = os.path.join(args.data_dir, 'mix_grounded/mix_grounded.json'),
-        video_path = "args.data_dir",
+        video_path = args.data_dir,
         num_frames = args.num_frames,
         num_segs = args.num_segs,
         num_temporal_tokens = args.num_temporal_tokens,
-        sample='rand',
+        sample='middle',
         llm=args.llm,
         )
     elif args.dataset == 'mix_sft':
         from datasets.mix_sft import MixSFT
         train_dataset = MixSFT(
         anno_path = os.path.join(args.data_dir, 'mix_sft/mix_sft.json'),
-        video_path = "args.data_dir",
+        video_path = args.data_dir,
         num_frames = args.num_frames,
         num_segs = args.num_segs,
         num_temporal_tokens = args.num_temporal_tokens,
-        sample='rand',
+        sample='middle',
         llm=args.llm,
         )
 
