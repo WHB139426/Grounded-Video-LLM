@@ -105,9 +105,9 @@ https://private-user-images.githubusercontent.com/115783170/373608088-69f83fd7-5
 ## 🎬 Grounded-VideoQA dataset
 We provide the Grounded-VideoQA dataset that we annotated with GPT-4o-mini in [[🤗HF](https://huggingface.co/datasets/WHB139426/Grounded-VideoLLM/blob/main/G-VideoQA-gpt4o-mini-anno.json)]. You can download the videos following [[ActivityNet](https://activity-net.org/download.html)] and [[QVHighlights](https://github.com/jayleicn/moment_detr)].
 
-## 🎬 Training Grounded-VideoLLM from scratch
+## 💡 Training Grounded-VideoLLM from scratch
 
-1. Prepare your training data
+1. Prepare your training data: 
 Set your own `data_path` in th following .sh files to storage the data before running the commands (You can choose to only download the specific data you want by modifying the following scripts): 
 ```Shell
 bash scripts/download_data_stage1.sh
