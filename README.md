@@ -49,6 +49,8 @@ conda activate grounded-videollm
 pip install torch==2.1.2 torchaudio==2.1.2 torchvision==0.16.2 torchdata==0.8.0 # to make sure install torch before flash-attn
 pip install -r requirements.txt
 pip install numpy==1.26.4 # to make sure numpy<2.0
+pip install peft==0.3.0
+pip install transformers==4.40.1 
 ```
 
 **Some installation suggestions**
