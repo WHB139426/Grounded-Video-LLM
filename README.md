@@ -114,7 +114,7 @@ Set your own `data_path` in th following .sh files to storage the data before ru
 ```Shell
 bash scripts/download_data_stage1.sh
 bash scripts/download_data_stage2.sh
-bash scripts/download_data_stage2.sh
+bash scripts/download_data_stage3.sh
 ```
 
 2. Set up the `data_dir` and `weight_path` in `scripts/phi3.5_xxx_8_a100.sh` where `xxx` can be [`pretrain`, `grounded`, `sft`], and then run the following commands:
